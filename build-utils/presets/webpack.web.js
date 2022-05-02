@@ -31,7 +31,7 @@ module.exports = ({mode}) => {
 
         plugins: [
             new HtmlWebpackPlugin(),
-            mode == 'production'? new MiniCssExtractPlugin() : undefined
+            ...(mode == 'production'? [new MiniCssExtractPlugin()]: []) 
         ]
     };
 }

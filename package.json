@@ -10,9 +10,7 @@
     "dev": "npm run webpack-dev-server -- --env mode=development  --hot",
     "dev:debug": "npm run debug",
     "dev:web": "npm run dev -- --env presets=web",
-    
     "debugthis": "node --inspect --inspect-brk ./src/index.js",
-    
     "prod": "npm run webpack  -- --env mode=production",
     "prod:debug": "npm run debug",
     "prod:web": "npm run prod -- --env presets=web",
@@ -36,7 +34,5 @@
     "mini-css-extract-plugin": "^2.6.0",
     "webpack-merge": "^5.8.0"
   },
-  "dependencies": {
-    
-  }
+  "dependencies": {}
 }
