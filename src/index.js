@@ -5,6 +5,7 @@ import "./css/styles.css";
 import { ALPHABET_ARR, MAX_INITIAL_BOXES } from "./constants";
 
 import {addElementToBody, randomNum} from './utils';
+import { createAnimation } from "./animation";
 import {createBox} from './Box';
 
 
@@ -57,6 +58,13 @@ const initBoxes = () => _.range(0, MAX_INITIAL_BOXES).forEach((i) => {
     Boxes.push(Box);
 });
 
+const dropping = () => {
+    Boxes.forEach(b => {
+        const center = b.getCenter();
+        b.setPos(center.x, center.y + 2);
+    });
+}
+
 
 
 /***************************************
@@ -64,3 +72,5 @@ const initBoxes = () => _.range(0, MAX_INITIAL_BOXES).forEach((i) => {
  */
 initBoxes();
 
+// const droppingAnimation = createAnimation(10, dropping);
+// droppingAnimation.run();
