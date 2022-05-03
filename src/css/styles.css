@@ -10,6 +10,53 @@ body {
     overflow: hidden;
 }
 
+.life-panel {
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    
+    display: flex;
+    flex-flow: row nowrap;
+    
+    width: 12rem;
+    height: 3rem;
+    border-radius: 1.5rem;
+
+    font-size: 2rem;
+    border: 3px solid black;
+    box-shadow: 0 0 5px black;
+    
+    overflow: hidden;
+
+    z-index: 10000;
+}
+
+.life-panel .label,
+.life-panel .life {
+    display: grid;
+    align-items: center;
+    text-align: center;
+    width: 50%;
+    height: 100%;
+    text-align: center;
+    
+       
+}
+
+.life-panel .label {
+    background-color: rgb(94, 0, 0);
+    color: white;
+    box-shadow: 0 0 5px white inset;
+
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.life-panel .life {
+    background-color: blanchedalmond;
+    font-weight: bold;
+    font-family:cursive;
+}
+
 .box {
     position: absolute;
     display: grid;
