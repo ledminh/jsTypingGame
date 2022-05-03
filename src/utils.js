@@ -1,7 +1,8 @@
 export {
     addElementTo,
     addElementToBody,
-    createElement
+    createElement, 
+    randomNum
 }
 
 const returnArrElem = (returnVal) => ({
@@ -24,11 +25,11 @@ const addInnerText = (innerText) => (elem) => {
 }
 
 
-const createElement = (elementType, className, innerText) => {
+const createElement = (elementType, className, innerText) => [() => document.createElement(elementType),
+                                                                ...returnArrElem(addClass(className)).If(typeof className == 'string'),
+                                                                ...returnArrElem(addInnerText(innerText)).If(typeof innerText == 'string'),
+                                                            ].reduce((val, func) => func(val), elementType);
+                        
 
-    return [() => document.createElement(elementType),
-        ...returnArrElem(addClass(className)).If(typeof className == 'string'),
-        ...returnArrElem(addInnerText(innerText)).If(typeof innerText == 'string'),
-        ].reduce((val, func) => func(val), elementType);
 
-}
+const randomNum = (from, to) => Math.floor(Math.random()*(to - from)) + from;
