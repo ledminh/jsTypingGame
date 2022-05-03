@@ -4,8 +4,11 @@ export {
     removeElementFrom,
     removeElementFromBody,
     createElement, 
-    randomNum
+    randomNum,
+    onCharacter,
+    onEnter
 }
+
 /******************************************************
  *      USAGE:
  *      ------------------------------------------ 
@@ -61,7 +64,7 @@ const addInnerText = (innerText) => (elem) => {
     return elem;
 }
 
- const createElement = (elementType, className, innerText) => [() => document.createElement(elementType),
+const createElement = (elementType, className, innerText) => [() => document.createElement(elementType),
                                                             ...returnArrElem(addClass(className)).If(typeof className == 'string'),
                                                             ...returnArrElem(addInnerText(innerText)).If(typeof innerText == 'string'),
                                                         ].reduce((val, func) => func(val), elementType);
@@ -72,8 +75,17 @@ const addInnerText = (innerText) => (elem) => {
 
 
 
+/*******************************************************
+ * AddListener 
+ */          
 
-                        
+const addListener = (element, eventName, listener) => element.addEventListener(eventName, listener);
+
+const onKeyUp = (element, condition, listener) => addListener(element, "keyup", (e) => (condition(e)? listener(e): false));
+const onEnter = (element, listener) => onKeyUp(element, (e) => e.code == 'Enter', listener);
+
+const onKeyDown = (element, condition, listener) => addListener(element, "keydown", (e) => (condition(e)? listener(e): false));
+const onCharacter = (element, listener) => onKeyDown(element, (e) => String.fromCharCode(e.keyCode).match(/^[A-Za-z]$/), (e) => listener(e.key));
 
 
 /*******************************************************

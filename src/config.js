@@ -3,7 +3,8 @@ export {
     DroppingTimeInterval,
     AddingTimeInterval,
     GroundHeight,
-    TouchGroundEffectDuration
+    TouchGroundEffectDuration,
+    DestroyedEffectDuration
 }
 
 const DroppingSpaceInterval = 2;
@@ -13,3 +14,4 @@ const AddingTimeInterval = 1500;
 
 const GroundHeight = 300;
 const TouchGroundEffectDuration = 300;
+const DestroyedEffectDuration = 300;

@@ -4,10 +4,10 @@ import "./css/styles.css";
 
 import { ALPHABET_ARR, MAX_INITIAL_BOXES } from "./constants";
 
-import {addElementToBody, randomNum, removeElementFromBody} from './utils';
+import {addElementToBody, onCharacter, randomNum, removeElementFromBody} from './utils';
 import { createAnimation } from "./animation";
 import {createBox} from './Box';
-import { AddingTimeInterval, DroppingSpaceInterval, DroppingTimeInterval, GroundHeight, TouchGroundEffectDuration } from "./config";
+import { AddingTimeInterval, DestroyedEffectDuration, DroppingSpaceInterval, DroppingTimeInterval, GroundHeight, TouchGroundEffectDuration } from "./config";
 
 
 let Boxes = [];
@@ -90,6 +90,17 @@ const touchGround = () => {
     })
 }
 
+const onType = (char) => {
+    Boxes.forEach(b => {
+        const boxName = b.getName();
+
+        if(!b.hasClass("to-be-destroyed") && boxName == char){
+            b.setClass("to-be-destroyed");
+            setTimeout(() => removeBox(b), DestroyedEffectDurationgg);
+        }
+    })
+}
+
 /***************************************
  * Execution 
  */
@@ -99,3 +110,6 @@ const touchGround = () => {
 
 // const addingAnimation = createAnimation(AddingTimeInterval, addBox);
 // addingAnimation.run();
+
+
+onCharacter(document.body, (char) => onType(char.toUpperCase()));

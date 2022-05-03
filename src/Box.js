@@ -22,6 +22,7 @@ function createBox(boxName) {
 
     //Public functions
     const getElement = () => Box;
+    const getName = () => boxName;
 
     const setClass = (className) => Box.classList.add(className);
     const hasClass = (className) => Box.classList.contains(className);
@@ -53,7 +54,8 @@ function createBox(boxName) {
         hasClass,
         getCenter,
         getRadius,
-        isTouch
+        isTouch,
+        getName
     }
 }
 

@@ -27,9 +27,25 @@ body {
 
     opacity: 1;
 
-    transition: opacity .3s;
+}
+
+@keyframes touchGroundAnimation {
+    to {
+        opacity: 0;
+    }
 }
 
 .touch-ground {
-    opacity: 0;
+    animation: touchGroundAnimation .3s;
+}
+
+@keyframes destroyedAnimation {
+    to {
+        opacity: 0;
+        transform: scale(1.2);
+    }
+}
+
+.to-be-destroyed {
+    animation: destroyedAnimation .3s;
 }
