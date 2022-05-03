@@ -58,7 +58,6 @@ const addBox = () => {
     // *************************
     // Will Be Executed
 
-
 const dropping = () => {
     Boxes.forEach(b => {
         const center = b.getCenter();
@@ -95,8 +94,8 @@ const touchGround = () => {
  * Execution 
  */
 
-const droppingAnimation = createAnimation(DroppingTimeInterval, dropping, touchGround);
-droppingAnimation.run();
+// const droppingAnimation = createAnimation(DroppingTimeInterval, dropping, touchGround);
+// droppingAnimation.run();
 
-const addingAnimation = createAnimation(AddingTimeInterval, addBox);
-addingAnimation.run();
+// const addingAnimation = createAnimation(AddingTimeInterval, addBox);
+// addingAnimation.run();
