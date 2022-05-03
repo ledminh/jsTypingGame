@@ -2,12 +2,12 @@ export {
     createAnimation
 }
 
-function createAnimation(timeInterval, animate) {
+function createAnimation(timeInterval, ...animates) {
     let runAgainAt = null; 
 
     const _animate = () => {
         if(Date.now() >= runAgainAt){
-            animate();
+            animates.forEach(ani => ani());
             runAgainAt += timeInterval;
         }
         

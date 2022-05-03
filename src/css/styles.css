@@ -24,4 +24,12 @@ body {
     padding: 1rem;
     background-color: rgb(110, 0, 0);
     color: white;
+
+    opacity: 1;
+
+    transition: opacity .3s;
+}
+
+.touch-ground {
+    opacity: 0;
 }
