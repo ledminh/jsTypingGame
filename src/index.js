@@ -69,6 +69,7 @@ const addBox = () => {
 function createLevelPanel() {
     const PanelDiv = createElement("div", "level-panel");
     
+    
     const ContentWrapperDiv = createElement("div", "content-wrapper");
     addElementTo(ContentWrapperDiv, PanelDiv);
     
@@ -78,8 +79,19 @@ function createLevelPanel() {
     const Level = createElement("span", "level");
     addElementTo(Level, ContentWrapperDiv);
 
+
+
     const getElement = () => PanelDiv;
-    const setLevel = (level) => Level.innerText = level;
+    const setLevel = (level, endGame) => {
+        if(endGame){
+            addClassToElement("end-game", PanelDiv);
+            Label.innerText = "";
+            Level.innerText = "END GAME";
+        }
+        else {
+            Level.innerText = level;
+        }
+    }
 
     return {
         getElement,
@@ -90,6 +102,7 @@ function createLevelPanel() {
 function createLevelNotification() {
     const PanelDiv = createElement("div", "level-notif");
     
+
     const ContentWrapperDiv = createElement("div", "content-wrapper");
     addElementTo(ContentWrapperDiv, PanelDiv);
     
@@ -100,7 +113,19 @@ function createLevelNotification() {
     addElementTo(Level, ContentWrapperDiv);
 
     const getElement = () => PanelDiv;
-    const setLevel = (level) => Level.innerText = level;
+    const setLevel = (level, endGame) => {
+        if(endGame){
+            addClassToElement("end-game", PanelDiv);
+            Label.innerText = "";
+            Level.innerText = "END GAME";
+        }
+        else {
+            Level.innerText = level;
+            
+        }
+    }
+    
+    
 
     const popUp = () => {
         addClassToElement("pop-up", PanelDiv);
@@ -120,8 +145,8 @@ function createLevelNotification() {
     }
 }
 
-    const notifLevel = (level) => {
-        LevelNotif.setLevel(level);
+    const notifLevel = (level, isEndGame) => {
+        LevelNotif.setLevel(level, isEndGame);
         LevelNotif.popUp();
     }
 
@@ -189,9 +214,9 @@ const onLevelChange = (level) => {
     addingAnimation.setTimeInterval(LevelControl.getAddingTimeInterval());
     droppingSpaceInterval = LevelControl.getDroppingSpaceInterval();
 
-    LevelPanel.setLevel(level);
+    LevelPanel.setLevel(level, LevelControl.isEndGame());
 
-    notifLevel(level);
+    notifLevel(level, LevelControl.isEndGame());
 }
 
 

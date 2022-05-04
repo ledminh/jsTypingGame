@@ -29,7 +29,7 @@ function createLevelControl(onLevelChange) {
 
     const getLevelObject = () => Level[currentLevel - 1];
     const getNextLevelObject = () => Level[currentLevel];
-
+    const isEndGame = () => currentLevel == maxLevel;
 
     /*******************************************/
 
@@ -63,6 +63,7 @@ function createLevelControl(onLevelChange) {
         getDroppingTimeInterval,
         getAddingTimeInterval,
         setLevel,
-        getLevel
+        getLevel,
+        isEndGame
     }
 }

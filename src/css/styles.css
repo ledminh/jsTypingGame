@@ -31,8 +31,20 @@ body {
     z-index: 10000;
 
     opacity: 0;
+
 }
 
+.level-notif.end-game {
+    background-color: brown;
+    color: white;
+    padding: 2rem;
+    
+}
+
+.level-notif.end-game .content-wrapper {
+    border: 7px double white;
+    padding: 2rem;
+}
 
 @keyframes LevelNotifPopup {
     0% {
@@ -52,7 +64,7 @@ body {
 
 
 .level-notif.pop-up {
-    animation: LevelNotifPopup .6ghs linear;
+    animation: LevelNotifPopup .6s linear;
 }
 
 .level-panel {
@@ -70,6 +82,10 @@ body {
     padding: 0.5rem;
 
     z-index: 10000;
+}
+
+.level-panel.end-game {
+    background-color: brown;
 }
 
 .level-panel .content-wrapper {
