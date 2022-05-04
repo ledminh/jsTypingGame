@@ -10,20 +10,28 @@ import {createBox} from './Box';
 import { AddingTimeInterval, DestroyedEffectDuration, DroppingSpaceInterval, DroppingTimeInterval, GroundHeight, Level, LevelNotifPopUpTime, TouchGroundEffectDuration } from "./config";
 
 
+import { createLevelPanel } from "./LevelPanel";
+
 import {createLevelControl} from './LevelControl';
 
 let Boxes = [];
 
 let life = 10;
+
+//Panels
 let lifePanel = null;
 let LevelPanel = null;
 let LevelNotif = null;
 
+// Control
 let LevelControl = null;
 
+// Animations
 let droppingAnimation = null,
     addingAnimation = null;
 
+
+// Configuration
 let droppingSpaceInterval = null;
 
 /***************************************
@@ -68,38 +76,7 @@ const addBox = () => {
     Boxes.push(Box);
 }
 
-function createLevelPanel() {
-    const PanelDiv = createElement("div", "level-panel");
-    
-    
-    const ContentWrapperDiv = createElement("div", "content-wrapper");
-    addElementTo(ContentWrapperDiv, PanelDiv);
-    
-    const Label = createElement("span", "label", "LEVEL ");
-    addElementTo(Label, ContentWrapperDiv);
 
-    const Level = createElement("span", "level");
-    addElementTo(Level, ContentWrapperDiv);
-
-
-
-    const getElement = () => PanelDiv;
-    const setLevel = (level, endGame) => {
-        if(endGame){
-            addClassToElement("end-game", PanelDiv);
-            Label.innerText = "";
-            Level.innerText = "END GAME";
-        }
-        else {
-            Level.innerText = level;
-        }
-    }
-
-    return {
-        getElement,
-        setLevel
-    }
-}
 
 function createLevelNotification() {
     const PanelDiv = createElement("div", "level-notif");
