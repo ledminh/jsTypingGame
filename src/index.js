@@ -14,6 +14,7 @@ import { createLevelPanel } from "./LevelPanel";
 
 import {createLevelControl} from './LevelControl';
 import { createLevelNotification } from "./LevelNotification";
+import { createLifePanel } from "./LifePanel";
 
 
 let Boxes = [];
@@ -108,10 +109,7 @@ const removeBox = (box) => {
     
 }
 
-const gameOver = () => {
-    droppingAnimation.stop();
-    addingAnimation.stop();
-}
+
 
 //***************************************************** */
 // Event Listenner
@@ -167,36 +165,11 @@ const onLevelChange = (level) => {
 // Init
 //***************************************************** */
 
-const createLifePanel = () => {
-    const lifePanel = createElement("div", "life-panel");
-    
-    const labelDiv = createElement("div", "label");
-    labelDiv.innerText = "LIFE";
-    addElementTo(labelDiv, lifePanel);
-
-    const lifeDiv = createElement("div", "life");
-    addElementTo(lifeDiv, lifePanel);
-
-    
-
-    return {
-        getElement: () => lifePanel,
-        updateLife: (life) => lifeDiv.innerText = life 
-    }
-} 
-
-
-
+    //DOM Element
 const setUpLifePanel = () => {
     lifePanel = createLifePanel();
     lifePanel.updateLife(life);
     addElementToBody(lifePanel.getElement());
-
-}
-
-const setUpLevelControl = () => {
-    LevelControl = createLevelControl(onLevelChange);
-    droppingSpaceInterval = LevelControl.getDroppingSpaceInterval();
 
 }
 
@@ -206,6 +179,24 @@ const setUpLevelPanel = () => {
     LevelPanel.setLevel(LevelControl.getLevel());
 }
 
+const setupLevelNotif = () => {
+    LevelNotif = createLevelNotification();
+    addElementToBody(LevelNotif.getElement());
+    LevelNotif.setLevel(LevelControl.getLevel());
+}
+
+
+    // Control Unit
+const setUpLevelControl = () => {
+    LevelControl = createLevelControl(onLevelChange);
+    droppingSpaceInterval = LevelControl.getDroppingSpaceInterval();
+
+}
+
+
+
+
+    //Adding Listener
 const addTypingListener = () => {
     onCharacter(document.body, (char) => onType(char.toUpperCase()));
 }
@@ -215,6 +206,7 @@ const addTypingListener = () => {
 
 function init() {
     setUpLifePanel();
+    
 
     setUpLevelControl();
 
@@ -222,10 +214,8 @@ function init() {
 
     addTypingListener();
     
+    setupLevelNotif();
     
-    LevelNotif = createLevelNotification();
-    addElementToBody(LevelNotif.getElement());
-    LevelNotif.setLevel(LevelControl.getLevel());
 }
 
 
@@ -243,8 +233,16 @@ function run() {
     addingAnimation.run();
 }
 
+//***************************************************** */
+// Run
+//***************************************************** */
 
 
+
+function gameOver()  {
+    droppingAnimation.stop();
+    addingAnimation.stop();
+}
 
 
 
@@ -252,7 +250,7 @@ function run() {
  * Execution 
  */
 init();
-run();
+//run();
 
 
 
