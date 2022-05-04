@@ -1,15 +1,13 @@
-import { LevelNotifPopUpTime } from "./config";
-import { addClassToElement, addElementTo, createElement, removeClassFromElement } from "./utils";
+import { createElement, addElementTo, addClassToElement } from "../utils";
 
-LevelNotifPopUpTime
 export {
-    createLevelNotification
+    createLevelPanel
 }
 
-function createLevelNotification() {
-    const PanelDiv = createElement("div", "level-notif");
+function createLevelPanel() {
+    const PanelDiv = createElement("div", "level-panel");
     
-
+    
     const ContentWrapperDiv = createElement("div", "content-wrapper");
     addElementTo(ContentWrapperDiv, PanelDiv);
     
@@ -18,6 +16,8 @@ function createLevelNotification() {
 
     const Level = createElement("span", "level");
     addElementTo(Level, ContentWrapperDiv);
+
+
 
     const getElement = () => PanelDiv;
     const setLevel = (level, endGame) => {
@@ -28,30 +28,11 @@ function createLevelNotification() {
         }
         else {
             Level.innerText = level;
-            
         }
     }
-    
-    
-
-    const _popUp = () => {
-        addClassToElement("pop-up", PanelDiv);
-
-        setTimeout(() => {
-            removeClassFromElement("pop-up", PanelDiv);
-        }, LevelNotifPopUpTime + 10);
-    }
-
-
-    const popUp = (level, isEndGame) => {
-        setLevel(level, isEndGame);
-        _popUp();
-    }
-
 
     return {
         getElement,
-        popUp,
         setLevel
     }
 }

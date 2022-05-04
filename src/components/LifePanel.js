@@ -1,4 +1,4 @@
-import { addElementTo, createElement } from "./utils";
+import { addElementTo, createElement } from "../utils";
 
 export {
     createLifePanel

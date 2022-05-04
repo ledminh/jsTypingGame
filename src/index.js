@@ -10,16 +10,24 @@ import {createBox} from './Box';
 import { AddingTimeInterval, DestroyedEffectDuration, DroppingSpaceInterval, DroppingTimeInterval, GroundHeight, Level, LevelNotifPopUpTime, TouchGroundEffectDuration } from "./config";
 
 
-import { createLevelPanel } from "./LevelPanel";
+import { createLevelPanel } from "./components/LevelPanel";
+import { createLifePanel } from "./components/LifePanel";
+import { createLevelNotification } from "./components/LevelNotification";
+
 
 import {createLevelControl} from './LevelControl';
-import { createLevelNotification } from "./LevelNotification";
-import { createLifePanel } from "./LifePanel";
+import { createGameOverScreen } from "./components/GameOverScreen";
+
+
 
 
 let Boxes = [];
 
 let life = 10;
+
+//Screens
+let GameOverScreen = null;
+
 
 //Panels
 let lifePanel = null;
@@ -186,6 +194,11 @@ const setupLevelNotif = () => {
 }
 
 
+const setUpGameOverScreen = () => {
+    GameOverScreen = createGameOverScreen();
+    addElementToBody(GameOverScreen.getElement());
+}
+
     // Control Unit
 const setUpLevelControl = () => {
     LevelControl = createLevelControl(onLevelChange);
@@ -215,6 +228,8 @@ function init() {
     addTypingListener();
     
     setupLevelNotif();
+
+    setUpGameOverScreen();
     
 }
 
@@ -234,7 +249,7 @@ function run() {
 }
 
 //***************************************************** */
-// Run
+// Game Over
 //***************************************************** */
 
 

@@ -23,6 +23,93 @@ body {
 
 }
 
+.game-over-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: rgba(0,0,0,.7);
+
+    z-index: 10000000000000;
+
+}
+
+.game-over-screen .content-wrapper {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.game-over-screen .text {
+    font-size: 4.5rem;
+    font-family: cursive;
+    font-weight: bold;
+    
+    text-align: center;
+    color: rgb(110, 18, 18);
+
+    margin-bottom: 2rem;
+
+}
+
+.game-over-screen .buttons {
+    width: 100%;
+    text-align: center;
+}
+
+.game-over-screen button {
+    padding: 1rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    font-family: cursive;
+
+    border: none;
+
+    border-radius: 20px;
+
+}
+
+.game-over-screen button.play-again {
+    margin-right: 2rem;
+
+    background-color: rgb(68, 124, 85);
+    color: aliceblue;
+}
+
+.game-over-screen button.play-again:hover {
+    background-color: rgb(97, 170, 119);
+    color: aliceblue;
+}
+
+
+.game-over-screen button.play-again:active {
+    background-color: rgb(85, 145, 103);
+    color: aliceblue;
+}
+
+.game-over-screen button.quit {
+    background-color: rgb(110, 38, 38);
+    color: aliceblue;
+}
+
+.game-over-screen button.quit:hover {
+    background-color: rgb(153, 51, 51);
+    color: aliceblue;
+}
+
+.game-over-screen button.quit:active {
+    background-color: rgb(117, 37, 37);
+    color: aliceblue;
+}
+
 .level-notif {
     font-family: 'Londrina Outline', cursive;
     font-size: 7rem;
