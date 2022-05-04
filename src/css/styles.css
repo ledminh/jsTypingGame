@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Londrina+Outline&display=swap');
 * {
     box-sizing: border-box;
     margin: 0;
@@ -5,9 +6,53 @@
 
 }
 
+html,
+body {
+    height: 100%;
+}
+
 body {
     position: relative;
+    display:flex;
+
+    justify-content:center;
+    
+    align-items:center;
+
     overflow: hidden;
+
+}
+
+.level-notif {
+    font-family: 'Londrina Outline', cursive;
+    font-size: 7rem;
+    font-weight: bold;
+    color:rgb(161, 0, 0);
+    z-index: 10000;
+
+    opacity: 0;
+}
+
+
+@keyframes LevelNotifPopup {
+    0% {
+        opacity: 1
+    }
+
+    50% {
+        opacity: .5;
+        transform: scale(1.5);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(2);
+    }
+}
+
+
+.level-notif.pop-up {
+    animation: LevelNotifPopup .6ghs linear;
 }
 
 .level-panel {
@@ -19,7 +64,7 @@ body {
     justify-items: center;
     align-items: center;
 
-    background-color: rgb(15, 48, 37);
+    background-color: rgb(5, 121, 82);
 
     
     padding: 0.5rem;
@@ -35,7 +80,7 @@ body {
     font-weight: bold;
 
 
-    color: rgb(219, 219, 219);
+    color: rgb(237, 242, 245);
 
 
 }
@@ -107,13 +152,17 @@ body {
 }
 
 @keyframes touchGroundAnimation {
-    to {
+    50% {
+        opacity: 0;
+    }
+
+    100% {
         opacity: 0;
     }
 }
 
 .touch-ground {
-    animation: touchGroundAnimation .3s;
+    animation: touchGroundAnimation .6s;
 }
 
 @keyframes destroyedAnimation {

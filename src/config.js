@@ -1,21 +1,20 @@
 export {
-    DroppingSpaceInterval,
-    DroppingTimeInterval,
-    AddingTimeInterval,
     GroundHeight,
     TouchGroundEffectDuration,
     DestroyedEffectDuration,
-    Level
+    Level,
+    LevelNotifPopUpTime
 }
 
-const DroppingSpaceInterval = 2;
-const DroppingTimeInterval = 10;
 
-const AddingTimeInterval = 700;
 
 const GroundHeight = 300;
 const TouchGroundEffectDuration = 300;
 const DestroyedEffectDuration = 300;
+
+
+
+const LevelNotifPopUpTime = 600;
 
 // const Level = [
 //     {

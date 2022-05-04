@@ -4,10 +4,10 @@ import "./css/styles.css";
 
 import { ALPHABET_ARR } from "./constants";
 
-import {addElementTo, addElementToBody, createElement, onCharacter, randomNum, removeElementFromBody} from './utils';
+import {addClassToElement, addElementTo, addElementToBody, createElement, onCharacter, onEnter, randomNum, removeClassFromElement, removeElementFromBody} from './utils';
 import { createAnimation } from "./animation";
 import {createBox} from './Box';
-import { AddingTimeInterval, DestroyedEffectDuration, DroppingSpaceInterval, DroppingTimeInterval, GroundHeight, Level, TouchGroundEffectDuration } from "./config";
+import { AddingTimeInterval, DestroyedEffectDuration, DroppingSpaceInterval, DroppingTimeInterval, GroundHeight, Level, LevelNotifPopUpTime, TouchGroundEffectDuration } from "./config";
 
 
 import {createLevelControl} from './LevelControl';
@@ -17,6 +17,7 @@ let Boxes = [];
 let life = 10;
 let lifePanel = null;
 let LevelPanel = null;
+let LevelNotif = null;
 
 let LevelControl = null;
 
@@ -86,6 +87,43 @@ function createLevelPanel() {
     }
 }
 
+function createLevelNotification() {
+    const PanelDiv = createElement("div", "level-notif");
+    
+    const ContentWrapperDiv = createElement("div", "content-wrapper");
+    addElementTo(ContentWrapperDiv, PanelDiv);
+    
+    const Label = createElement("span", "label", "LEVEL ");
+    addElementTo(Label, ContentWrapperDiv);
+
+    const Level = createElement("span", "level");
+    addElementTo(Level, ContentWrapperDiv);
+
+    const getElement = () => PanelDiv;
+    const setLevel = (level) => Level.innerText = level;
+
+    const popUp = () => {
+        addClassToElement("pop-up", PanelDiv);
+
+        setTimeout(() => {
+            removeClassFromElement("pop-up", PanelDiv);
+        }, LevelNotifPopUpTime + 10);
+    }
+
+
+
+
+    return {
+        getElement,
+        setLevel,
+        popUp
+    }
+}
+
+    const notifLevel = (level) => {
+        LevelNotif.setLevel(level);
+        LevelNotif.popUp();
+    }
 
     // *************************
     // Will Be Executed
@@ -112,6 +150,9 @@ const removeBox = (box) => {
     
 }
 
+//***************************************************** */
+// Event Listenner
+//***************************************************** */
 const touchGround = () => {
     Boxes.forEach(b => {
         const centerY = b.getCenter().y;
@@ -143,6 +184,22 @@ const onType = (char) => {
     })
 }
 
+const onLevelChange = (level) => {
+    droppingAnimation.setTimeInterval(LevelControl.getDroppingTimeInterval());
+    addingAnimation.setTimeInterval(LevelControl.getAddingTimeInterval());
+    droppingSpaceInterval = LevelControl.getDroppingSpaceInterval();
+
+    LevelPanel.setLevel(level);
+
+    notifLevel(level);
+}
+
+
+
+//***************************************************** */
+// Init
+//***************************************************** */
+
 const createLifePanel = () => {
     const lifePanel = createElement("div", "life-panel");
     
@@ -161,32 +218,55 @@ const createLifePanel = () => {
     }
 } 
 
-const onLevelChange = (level) => {
-    droppingAnimation.setTimeInterval(LevelControl.getDroppingTimeInterval());
-    addingAnimation.setTimeInterval(LevelControl.getAddingTimeInterval());
-    droppingSpaceInterval = LevelControl.getDroppingSpaceInterval();
 
-    LevelPanel.setLevel(level);
-}
 
-function init() {
+const setUpLifePanel = () => {
     lifePanel = createLifePanel();
     lifePanel.updateLife(life);
     addElementToBody(lifePanel.getElement());
 
+}
+
+const setUpLevelControl = () => {
     LevelControl = createLevelControl(onLevelChange);
     droppingSpaceInterval = LevelControl.getDroppingSpaceInterval();
 
+}
+
+const setUpLevelPanel = () => {
     LevelPanel = createLevelPanel();
     addElementToBody(LevelPanel.getElement());
     LevelPanel.setLevel(LevelControl.getLevel());
-
-
-
-    onCharacter(document.body, (char) => onType(char.toUpperCase()));
-
 }
 
+const addTypingListener = () => {
+    onCharacter(document.body, (char) => onType(char.toUpperCase()));
+}
+
+
+
+
+function init() {
+    setUpLifePanel();
+
+    setUpLevelControl();
+
+    setUpLevelPanel();
+
+    addTypingListener();
+    
+    
+    LevelNotif = createLevelNotification();
+    addElementToBody(LevelNotif.getElement());
+    LevelNotif.setLevel(LevelControl.getLevel());
+}
+
+
+
+
+//***************************************************** */
+// Run
+//***************************************************** */
 
 function run() {
     droppingAnimation = createAnimation(LevelControl.getDroppingTimeInterval(), () => dropping(droppingSpaceInterval), touchGround);
@@ -196,11 +276,17 @@ function run() {
     addingAnimation.run();
 }
 
+
+
+
+
+
 /***************************************
  * Execution 
  */
 init();
 //run();
+
 
 
 

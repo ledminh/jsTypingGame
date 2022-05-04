@@ -1,6 +1,8 @@
 export {
     addElementTo,
     addElementToBody,
+    addClassToElement,
+    removeClassFromElement,
     removeElementFrom,
     removeElementFromBody,
     createElement, 
@@ -57,6 +59,9 @@ const removeElementFromBody = (element) => removeElementFrom(element, document.b
     elem.classList.add(className);
     return elem;
 };
+
+const addClassToElement = (className, element) => element.classList.add(className);
+const removeClassFromElement = (className, element) => element.classList.remove(className);
 
 const addInnerText = (innerText) => (elem) => {
     elem.innerText = innerText;
