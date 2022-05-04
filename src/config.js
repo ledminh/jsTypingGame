@@ -141,36 +141,36 @@ const Level = [
         life: 10,
         droppingSpaceInterval: 2,
         droppingTimeInterval: 10,
-        addingTimeInterval:1700
+        addingTimeInterval:1200
     },
 
     {
         life: 15,
         droppingSpaceInterval: 2,
         droppingTimeInterval: 10,
-        addingTimeInterval: 1400
+        addingTimeInterval: 1000
     },
 
     {
         life: 20,
         droppingSpaceInterval: 2,
         droppingTimeInterval: 10,
-        addingTimeInterval: 1200
+        addingTimeInterval: 700
     },
 
-    {
-        life: 25,
-        droppingSpaceInterval: 2,
-        droppingTimeInterval: 10,
-        addingTimeInterval: 1200
-    },
+    // {
+    //     life: 25,
+    //     droppingSpaceInterval: 2,
+    //     droppingTimeInterval: 10,
+    //     addingTimeInterval: 1200
+    // },
 
-    {
-        life: 30,
-        droppingSpaceInterval: 2,
-        droppingTimeInterval: 10,
-        addingTimeInterval: 1200
-    },
+    // {
+    //     life: 30,
+    //     droppingSpaceInterval: 2,
+    //     droppingTimeInterval: 10,
+    //     addingTimeInterval: 1200
+    // },
 
     // {
     //     life: 35,

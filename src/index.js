@@ -13,6 +13,8 @@ import { AddingTimeInterval, DestroyedEffectDuration, DroppingSpaceInterval, Dro
 import { createLevelPanel } from "./LevelPanel";
 
 import {createLevelControl} from './LevelControl';
+import { createLevelNotification } from "./LevelNotification";
+
 
 let Boxes = [];
 
@@ -78,56 +80,8 @@ const addBox = () => {
 
 
 
-function createLevelNotification() {
-    const PanelDiv = createElement("div", "level-notif");
-    
 
-    const ContentWrapperDiv = createElement("div", "content-wrapper");
-    addElementTo(ContentWrapperDiv, PanelDiv);
-    
-    const Label = createElement("span", "label", "LEVEL ");
-    addElementTo(Label, ContentWrapperDiv);
-
-    const Level = createElement("span", "level");
-    addElementTo(Level, ContentWrapperDiv);
-
-    const getElement = () => PanelDiv;
-    const setLevel = (level, endGame) => {
-        if(endGame){
-            addClassToElement("end-game", PanelDiv);
-            Label.innerText = "";
-            Level.innerText = "END GAME";
-        }
-        else {
-            Level.innerText = level;
-            
-        }
-    }
-    
-    
-
-    const popUp = () => {
-        addClassToElement("pop-up", PanelDiv);
-
-        setTimeout(() => {
-            removeClassFromElement("pop-up", PanelDiv);
-        }, LevelNotifPopUpTime + 10);
-    }
-
-
-
-
-    return {
-        getElement,
-        setLevel,
-        popUp
-    }
-}
-
-    const notifLevel = (level, isEndGame) => {
-        LevelNotif.setLevel(level, isEndGame);
-        LevelNotif.popUp();
-    }
+   
 
     // *************************
     // Will Be Executed
@@ -204,7 +158,7 @@ const onLevelChange = (level) => {
 
     LevelPanel.setLevel(level, LevelControl.isEndGame());
 
-    notifLevel(level, LevelControl.isEndGame());
+    LevelNotif.popUp(level, LevelControl.isEndGame());
 }
 
 
@@ -298,7 +252,7 @@ function run() {
  * Execution 
  */
 init();
-//run();
+run();
 
 
 
