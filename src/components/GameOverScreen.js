@@ -4,7 +4,7 @@ export {
     createGameOverScreen
 }
 
-function createGameOverScreen() {
+function createGameOverScreen(playAgainHandle, quitHandle) {
     const GameOverScreen = createElement("div", "game-over-screen");
     
     const contentWrapper = createElement("div", "content-wrapper");
@@ -20,10 +20,11 @@ function createGameOverScreen() {
 
     const playAgainButton = createElement("button", "play-again", "PLAY AGAIN?");
     addElementTo(playAgainButton, buttonsDiv);
+    playAgainButton.addEventListener("click", playAgainHandle);
 
     const quitButton = createElement("button", "quit", "QUIT");
     addElementTo(quitButton, buttonsDiv);
-
+    quitButton.addEventListener("click", quitHandle);
 
 
     const getElement = () => GameOverScreen;

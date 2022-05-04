@@ -86,13 +86,13 @@ body {
 
 .game-over-screen button.play-again:hover {
     background-color: rgb(97, 170, 119);
-    color: aliceblue;
+    
 }
 
 
 .game-over-screen button.play-again:active {
     background-color: rgb(85, 145, 103);
-    color: aliceblue;
+    
 }
 
 .game-over-screen button.quit {
@@ -102,12 +102,12 @@ body {
 
 .game-over-screen button.quit:hover {
     background-color: rgb(153, 51, 51);
-    color: aliceblue;
+    
 }
 
 .game-over-screen button.quit:active {
     background-color: rgb(117, 37, 37);
-    color: aliceblue;
+    
 }
 
 .level-notif {

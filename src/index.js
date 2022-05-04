@@ -167,6 +167,13 @@ const onLevelChange = (level) => {
     LevelNotif.popUp(level, LevelControl.isEndGame());
 }
 
+const playAgainHandle = () => {
+    
+}
+
+const quitHandle = () => {
+    
+}
 
 
 //***************************************************** */
@@ -195,7 +202,7 @@ const setupLevelNotif = () => {
 
 
 const setUpGameOverScreen = () => {
-    GameOverScreen = createGameOverScreen();
+    GameOverScreen = createGameOverScreen(playAgainHandle, quitHandle);
     addElementToBody(GameOverScreen.getElement());
 }
 
