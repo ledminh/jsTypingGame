@@ -2,9 +2,10 @@ export {
     createAnimation
 }
 
-function createAnimation(timeInterval, ...animates) {
+function createAnimation(timeIntervalUserDefined, ...animates) {
     let runAgainAt = null; 
-
+    let timeInterval = timeIntervalUserDefined;
+    
     const _animate = () => {
         if(Date.now() >= runAgainAt){
             animates.forEach(ani => ani());
@@ -15,6 +16,8 @@ function createAnimation(timeInterval, ...animates) {
     }
 
 
+    const setTimeInterval = (tI) => timeInterval = tI;
+    
     const run =  () =>  {
         runAgainAt = Date.now();
 
@@ -23,7 +26,8 @@ function createAnimation(timeInterval, ...animates) {
     };
 
     return {
-        run
+        run,
+        setTimeInterval
     }
 }
 

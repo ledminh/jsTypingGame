@@ -7,14 +7,23 @@ import { ALPHABET_ARR } from "./constants";
 import {addElementTo, addElementToBody, createElement, onCharacter, randomNum, removeElementFromBody} from './utils';
 import { createAnimation } from "./animation";
 import {createBox} from './Box';
-import { AddingTimeInterval, DestroyedEffectDuration, DroppingSpaceInterval, DroppingTimeInterval, GroundHeight, TouchGroundEffectDuration } from "./config";
+import { AddingTimeInterval, DestroyedEffectDuration, DroppingSpaceInterval, DroppingTimeInterval, GroundHeight, Level, TouchGroundEffectDuration } from "./config";
 
+
+import {createLevelControl} from './LevelControl';
 
 let Boxes = [];
 
 let life = 10;
 let lifePanel = null;
+let LevelPanel = null;
 
+let LevelControl = null;
+
+let droppingAnimation = null,
+    addingAnimation = null;
+
+let droppingSpaceInterval = null;
 
 /***************************************
  * Functions 
@@ -22,16 +31,16 @@ let lifePanel = null;
 
     // *************************
     // Helpers
-    const addLife = () => life++;
-    const minusLife = () => life--;
+const addLife = () => life++;
+const minusLife = () => life--;
 
-    const isTouch = (xCoord, yCoord, radius) => Boxes.reduce((result, currentB) => {
-                                            
-                                            if(result == true) return true;
-                                            
-                                            return currentB.isTouch(xCoord, yCoord, radius);
+const isTouch = (xCoord, yCoord, radius) => Boxes.reduce((result, currentB) => {
+                                        
+                                        if(result == true) return true;
+                                        
+                                        return currentB.isTouch(xCoord, yCoord, radius);
 
-                                        }, false);
+                                    }, false);
 
 
 
@@ -56,9 +65,26 @@ const addBox = () => {
     Boxes.push(Box);
 }
 
+function createLevelPanel() {
+    const PanelDiv = createElement("div", "level-panel");
+    
+    const ContentWrapperDiv = createElement("div", "content-wrapper");
+    addElementTo(ContentWrapperDiv, PanelDiv);
+    
+    const Label = createElement("span", "label", "LEVEL ");
+    addElementTo(Label, ContentWrapperDiv);
 
+    const Level = createElement("span", "level");
+    addElementTo(Level, ContentWrapperDiv);
 
+    const getElement = () => PanelDiv;
+    const setLevel = (level) => Level.innerText = level;
 
+    return {
+        getElement,
+        setLevel
+    }
+}
 
 
     // *************************
@@ -67,7 +93,7 @@ const addBox = () => {
 const dropping = () => {
     Boxes.forEach(b => {
         const center = b.getCenter();
-        const nextY = center.y + DroppingSpaceInterval;
+        const nextY = center.y + droppingSpaceInterval;
 
         b.setPos(center.x, nextY);
     });
@@ -77,7 +103,9 @@ const dropping = () => {
 const removeBox = (box) => {
     const boxNode = box.getElement();
 
-    removeElementFromBody(boxNode);
+    if(boxNode.parentNode){
+        removeElementFromBody(boxNode);
+    }
     
     Boxes = Boxes.filter(b => b != box);
 
@@ -106,6 +134,9 @@ const onType = (char) => {
         if(!b.hasClass("to-be-destroyed") && boxName == char){
             addLife();
             lifePanel.updateLife(life);
+
+            LevelControl.setLevel(life);
+
             b.setClass("to-be-destroyed");
             setTimeout(() => removeBox(b), DestroyedEffectDuration);
         }
@@ -130,21 +161,47 @@ const createLifePanel = () => {
     }
 } 
 
+const onLevelChange = (level) => {
+    droppingAnimation.setTimeInterval(LevelControl.getDroppingTimeInterval());
+    addingAnimation.setTimeInterval(LevelControl.getAddingTimeInterval());
+    droppingSpaceInterval = LevelControl.getDroppingSpaceInterval();
+
+    LevelPanel.setLevel(level);
+}
+
+function init() {
+    lifePanel = createLifePanel();
+    lifePanel.updateLife(life);
+    addElementToBody(lifePanel.getElement());
+
+    LevelControl = createLevelControl(onLevelChange);
+    droppingSpaceInterval = LevelControl.getDroppingSpaceInterval();
+
+    LevelPanel = createLevelPanel();
+    addElementToBody(LevelPanel.getElement());
+    LevelPanel.setLevel(LevelControl.getLevel());
+
+
+
+    onCharacter(document.body, (char) => onType(char.toUpperCase()));
+
+}
+
+
+function run() {
+    droppingAnimation = createAnimation(LevelControl.getDroppingTimeInterval(), () => dropping(droppingSpaceInterval), touchGround);
+    droppingAnimation.run();
+
+    addingAnimation = createAnimation(LevelControl.getAddingTimeInterval(), addBox);
+    addingAnimation.run();
+}
+
 /***************************************
  * Execution 
  */
-
-lifePanel = createLifePanel();
-lifePanel.updateLife(life);
-addElementToBody(lifePanel.getElement());
-
-onCharacter(document.body, (char) => onType(char.toUpperCase()));
+init();
+//run();
 
 
-// const droppingAnimation = createAnimation(DroppingTimeInterval, dropping, touchGround);
-// droppingAnimation.run();
-
-// const addingAnimation = createAnimation(AddingTimeInterval, addBox);
-// addingAnimation.run();
 
 

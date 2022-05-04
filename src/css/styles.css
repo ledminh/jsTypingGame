@@ -10,6 +10,36 @@ body {
     overflow: hidden;
 }
 
+.level-panel {
+    position: absolute;
+    top: 5.5rem;
+    right: 0;
+
+    display: grid;
+    justify-items: center;
+    align-items: center;
+
+    background-color: rgb(15, 48, 37);
+
+    
+    padding: 0.5rem;
+
+    z-index: 10000;
+}
+
+.level-panel .content-wrapper {
+    
+    border: 10px double rgb(219, 219, 219);
+    padding: 0.5rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+
+
+    color: rgb(219, 219, 219);
+
+
+}
+
 .life-panel {
     position: absolute;
     top: 1rem;
@@ -96,3 +126,5 @@ body {
 .to-be-destroyed {
     animation: destroyedAnimation .3s;
 }
+
+
