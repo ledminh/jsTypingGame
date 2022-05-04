@@ -35,6 +35,8 @@ let droppingSpaceInterval = null;
 const addLife = () => life++;
 const minusLife = () => life--;
 
+const isGameOver = () => life == 0;
+
 const isTouch = (xCoord, yCoord, radius) => Boxes.reduce((result, currentB) => {
                                         
                                         if(result == true) return true;
@@ -175,6 +177,11 @@ const removeBox = (box) => {
     
 }
 
+const gameOver = () => {
+    droppingAnimation.stop();
+    addingAnimation.stop();
+}
+
 //***************************************************** */
 // Event Listenner
 //***************************************************** */
@@ -188,6 +195,10 @@ const touchGround = () => {
 
             b.setClass("touch-ground");
             setTimeout(() => removeBox(b), TouchGroundEffectDuration + 10);
+
+            if(isGameOver()) {
+                gameOver();
+            }
         }
 
     })

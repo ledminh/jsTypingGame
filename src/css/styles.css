@@ -37,13 +37,13 @@ body {
 .level-notif.end-game {
     background-color: brown;
     color: white;
-    padding: 2rem;
+    padding: 1rem;
     
 }
 
 .level-notif.end-game .content-wrapper {
     border: 7px double white;
-    padding: 2rem;
+    padding: 1rem;
 }
 
 @keyframes LevelNotifPopup {
