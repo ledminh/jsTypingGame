@@ -41,6 +41,49 @@ body {
 
 }
 
+.game-over-screen .credit-screen {
+    border: 2px solid white;
+    border-radius: 20px;
+    padding: 2rem;
+    color: rgb(209, 184, 184);
+    font-size: 1.2rem;
+
+    text-align: center;
+}
+
+.game-over-screen .credit-screen h2 {
+    color: rgb(209, 209, 209);
+    font-size: 3rem;
+    font-family: cursive;
+
+    margin-bottom: 2rem;
+}
+
+.game-over-screen .credit-screen h3 {
+    color: rgb(221, 118, 118);
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.game-over-screen .credit-screen ul {
+    list-style-type: none;
+}
+
+.game-over-screen .credit-screen li {
+    margin-top: .5rem;
+}
+
+.game-over-screen .credit-screen a {
+    color:rgb(39, 133, 133);
+    
+}
+
+.game-over-screen .credit-screen a:visited {
+    color:rgb(53, 167, 167);
+}
+
+
+
 .hidden {
     
     display: none;

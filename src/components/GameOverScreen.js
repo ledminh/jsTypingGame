@@ -33,33 +33,30 @@ function createCreditScreen() {
 function createGameOverScreen(playAgainHandle, quitHandle) {
     const GameOverScreen = createElement("div", "game-over-screen");
     
-    // TODO: uncomment after finish quit screen
-    // addClassToElement("hidden", GameOverScreen);
+    
+    addClassToElement("hidden", GameOverScreen);
 
     const contentWrapper = createElement("div", "content-wrapper");
     addElementTo(contentWrapper, GameOverScreen);
 
     const textDiv = createElement("div", "text", "GAME OVER");
-    const buttonsDiv = createElement("div", "buttons");
+    addElementTo(textDiv, contentWrapper);
 
+    const buttonsDiv = createElement("div", "buttons");
+    addElementTo(buttonsDiv, contentWrapper);
 
     const creditScreen = createCreditScreen();
+    addClassToElement("hidden", creditScreen);
     addElementTo(creditScreen, contentWrapper);
 
-
-
-    // 
-    // addElementTo(textDiv, contentWrapper);
-
-    // 
-    // addElementTo(buttonsDiv, contentWrapper);
-
+    const showCreditScreen = () => removeClassFromElement("hidden", creditScreen);
 
     
     function quitHandle() {
         removeElementFrom(textDiv, contentWrapper);
         removeElementFrom(buttonsDiv, contentWrapper);
 
+        showCreditScreen();
     }
 
 
