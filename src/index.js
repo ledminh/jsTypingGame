@@ -107,7 +107,7 @@ const clearBox = () => {
         LevelPanel.setLevel(LevelControl.getLevel(), LevelControl.isEndGame());
 
         LevelNotif.reset();
-        
+
 
         clearBox();
 
@@ -199,9 +199,6 @@ const playAgainHandle = () => {
     reRun();
 }
 
-const quitHandle = () => {
-    
-}
 
 
 //***************************************************** */
@@ -230,7 +227,7 @@ const setupLevelNotif = () => {
 
 
 const setUpGameOverScreen = () => {
-    GameOverScreen = createGameOverScreen(playAgainHandle, quitHandle);
+    GameOverScreen = createGameOverScreen(playAgainHandle);
     addElementToBody(GameOverScreen.getElement());
 }
 
@@ -308,7 +305,7 @@ function gameOver()  {
  * Execution 
  */
 init();
-run();
+//run();
 
 
 
