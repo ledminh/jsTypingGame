@@ -15,7 +15,7 @@ module.exports = ({mode}) => {
                     use: mode == 'production'? [MiniCssExtractPlugin.loader, "css-loader"] :["style-loader", "css-loader"]
                 },
                 {
-                    test: /\.jpe?g$/,
+                    test: /\.jpe?g$|\.png$/,
                     use: [
                         {
                             loader: "url-loader",

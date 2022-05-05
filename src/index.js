@@ -17,7 +17,14 @@ import { createLevelNotification } from "./components/LevelNotification";
 
 import {createLevelControl} from './LevelControl';
 import { createGameOverScreen } from "./components/GameOverScreen";
+
+import { createStartScreen } from "./components/StartScreen";
+
 import { createLifeControl } from "./components/LifeControl";
+
+import groundImg from './imgs/ground.png';
+import cloudImg from './imgs/cloud.png';
+
 
 
 let Boxes = [];
@@ -25,6 +32,7 @@ let Boxes = [];
 
 //Screens
 let GameOverScreen = null;
+let StartScreen = null;
 
 
 //Panels
@@ -199,13 +207,40 @@ const playAgainHandle = () => {
     reRun();
 }
 
-
+const playButtonStartScreenOnClick = () => {
+    StartScreen.hide();
+    run();
+}
 
 //***************************************************** */
 // Init
 //***************************************************** */
 
     //DOM Element
+
+const addGround = () => {
+    const ground = createElement("div", "ground");
+
+    
+
+    ground.style.background = `url(${groundImg}) repeat-x`;
+    ground.style.height =  (GroundHeight + 650)  + "px";
+    ground.style.backgroundSize = "cover";
+
+    addElementToBody(ground);
+
+
+}
+
+//TODO
+const addClouds = () => {
+    const cloud = createElement("img", "cloud");
+
+    cloud.src = cloudImg;
+    
+    addElementToBody(cloud);
+}
+
 const setUpLifePanel = () => {
     lifePanel = createLifePanel();
     lifePanel.updateLife(LifeControl.getLife());
@@ -229,6 +264,12 @@ const setupLevelNotif = () => {
 const setUpGameOverScreen = () => {
     GameOverScreen = createGameOverScreen(playAgainHandle);
     addElementToBody(GameOverScreen.getElement());
+}
+
+const setUpStartScreen = () => {
+    StartScreen = createStartScreen(playButtonStartScreenOnClick);
+    
+    addElementToBody(StartScreen.getElement());
 }
 
     // Control Unit
@@ -272,9 +313,15 @@ function init() {
     
     setupLevelNotif();
 
+    
+    setUpStartScreen();
+
     setUpGameOverScreen();
 
     setUpAnimation();
+
+    addGround();
+    addClouds();
 }
 
 
@@ -305,7 +352,7 @@ function gameOver()  {
  * Execution 
  */
 init();
-//run();
+
 
 
 
