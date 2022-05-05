@@ -34,7 +34,7 @@ body {
     justify-content: center;
     align-items: center;
 
-    background-color: rgba(0,0,0,.7);
+    background-color: rgba(0,0,0,.92);
 
     z-index: 10000000000000;
 
@@ -58,7 +58,7 @@ body {
     font-weight: bold;
     
     text-align: center;
-    color: rgb(110, 18, 18);
+    color: rgb(216, 10, 10);
 
     margin-bottom: 2rem;
 
