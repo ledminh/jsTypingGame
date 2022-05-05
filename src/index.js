@@ -17,13 +17,11 @@ import { createLevelNotification } from "./components/LevelNotification";
 
 import {createLevelControl} from './LevelControl';
 import { createGameOverScreen } from "./components/GameOverScreen";
-
-
+import { createLifeControl } from "./components/LifeControl";
 
 
 let Boxes = [];
 
-let life = 10;
 
 //Screens
 let GameOverScreen = null;
@@ -34,8 +32,11 @@ let lifePanel = null;
 let LevelPanel = null;
 let LevelNotif = null;
 
+
 // Control
 let LevelControl = null;
+let LifeControl = null;
+
 
 // Animations
 let droppingAnimation = null,
@@ -45,16 +46,13 @@ let droppingAnimation = null,
 // Configuration
 let droppingSpaceInterval = null;
 
+
 /***************************************
  * Functions 
  */
 
     // *************************
     // Helpers
-const addLife = () => life++;
-const minusLife = () => life--;
-
-const isGameOver = () => life == 0;
 
 const isTouch = (xCoord, yCoord, radius) => Boxes.reduce((result, currentB) => {
                                         
@@ -87,10 +85,38 @@ const addBox = () => {
     Boxes.push(Box);
 }
 
+const clearBox = () => {
+    Boxes.forEach(b => b.getElement().parentNode? b.getElement().parentNode.removeChild(b.getElement()) : false);
+    
+    Boxes = []; 
+}
 
+    
+    const stop = () => {
+        droppingAnimation.stop();
+        addingAnimation.stop();
+    }
 
+    function reset() {
+        LifeControl.reset();
+        lifePanel.updateLife(LifeControl.getLife());
 
+        LevelControl.reset();
+
+        LevelPanel.reset();
+        LevelPanel.setLevel(LevelControl.getLevel(), LevelControl.isEndGame());
+
+        LevelNotif.reset();
+        
+
+        clearBox();
+
+    }
    
+    function reRun() {
+        droppingAnimation.reRun();
+        addingAnimation.reRun();
+    }
 
     // *************************
     // Will Be Executed
@@ -127,13 +153,13 @@ const touchGround = () => {
         const centerY = b.getCenter().y;
 
         if(!b.hasClass("touch-ground") && centerY >= window.innerHeight - GroundHeight){
-            minusLife();
-            lifePanel.updateLife(life);
+            LifeControl.minusLife();
+            lifePanel.updateLife(LifeControl.getLife());
 
             b.setClass("touch-ground");
             setTimeout(() => removeBox(b), TouchGroundEffectDuration + 10);
 
-            if(isGameOver()) {
+            if(LifeControl.isGameOver()) {
                 gameOver();
             }
         }
@@ -146,10 +172,10 @@ const onType = (char) => {
         const boxName = b.getName();
         
         if(!b.hasClass("to-be-destroyed") && boxName == char){
-            addLife();
-            lifePanel.updateLife(life);
+            LifeControl.addLife();
+            lifePanel.updateLife(LifeControl.getLife());
 
-            LevelControl.setLevel(life);
+            LevelControl.setLevel(LifeControl.getLife());
 
             b.setClass("to-be-destroyed");
             setTimeout(() => removeBox(b), DestroyedEffectDuration);
@@ -168,7 +194,9 @@ const onLevelChange = (level) => {
 }
 
 const playAgainHandle = () => {
-    
+    reset();
+    GameOverScreen.hide();
+    reRun();
 }
 
 const quitHandle = () => {
@@ -183,7 +211,7 @@ const quitHandle = () => {
     //DOM Element
 const setUpLifePanel = () => {
     lifePanel = createLifePanel();
-    lifePanel.updateLife(life);
+    lifePanel.updateLife(LifeControl.getLife());
     addElementToBody(lifePanel.getElement());
 
 }
@@ -213,8 +241,18 @@ const setUpLevelControl = () => {
 
 }
 
+const setupLifeControl = () => {
+    LifeControl = createLifeControl();  
+}
 
 
+    //Animation
+const setUpAnimation = () => {
+    droppingAnimation = createAnimation(LevelControl.getDroppingTimeInterval(), () => dropping(droppingSpaceInterval), touchGround);
+
+    addingAnimation = createAnimation(LevelControl.getAddingTimeInterval(), addBox);
+    
+}
 
     //Adding Listener
 const addTypingListener = () => {
@@ -225,6 +263,7 @@ const addTypingListener = () => {
 
 
 function init() {
+    setupLifeControl();
     setUpLifePanel();
     
 
@@ -237,7 +276,8 @@ function init() {
     setupLevelNotif();
 
     setUpGameOverScreen();
-    
+
+    setUpAnimation();
 }
 
 
@@ -248,10 +288,7 @@ function init() {
 //***************************************************** */
 
 function run() {
-    droppingAnimation = createAnimation(LevelControl.getDroppingTimeInterval(), () => dropping(droppingSpaceInterval), touchGround);
     droppingAnimation.run();
-
-    addingAnimation = createAnimation(LevelControl.getAddingTimeInterval(), addBox);
     addingAnimation.run();
 }
 
@@ -260,10 +297,9 @@ function run() {
 //***************************************************** */
 
 
-
 function gameOver()  {
-    droppingAnimation.stop();
-    addingAnimation.stop();
+    stop();
+    GameOverScreen.show();
 }
 
 
@@ -272,7 +308,7 @@ function gameOver()  {
  * Execution 
  */
 init();
-//run();
+run();
 
 
 

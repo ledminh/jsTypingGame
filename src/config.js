@@ -3,7 +3,8 @@ export {
     TouchGroundEffectDuration,
     DestroyedEffectDuration,
     Level,
-    LevelNotifPopUpTime
+    LevelNotifPopUpTime,
+    LifeInitialValue
 }
 
 
@@ -15,6 +16,9 @@ const DestroyedEffectDuration = 300;
 
 
 const LevelNotifPopUpTime = 600;
+
+
+const LifeInitialValue = 10;
 
 // const Level = [
 //     {

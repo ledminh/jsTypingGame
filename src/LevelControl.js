@@ -39,6 +39,11 @@ function createLevelControl(onLevelChange) {
 
     const getLevel = () => currentLevel;
 
+    function reset() {
+        currentLevel = 1;
+        init();
+    }
+
     function setLevel(life) {
         if(currentLevel < maxLevel && life == getNextLevelObject().life){
             currentLevel++;
@@ -64,6 +69,7 @@ function createLevelControl(onLevelChange) {
         getAddingTimeInterval,
         setLevel,
         getLevel,
-        isEndGame
+        isEndGame,
+        reset
     }
 }

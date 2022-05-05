@@ -20,6 +20,12 @@ function createLevelNotification() {
     addElementTo(Level, ContentWrapperDiv);
 
     const getElement = () => PanelDiv;
+
+    const reset = () => {
+        removeClassFromElement("end-game", PanelDiv);
+        Label.innerText = "LEVEL ";
+    }
+
     const setLevel = (level, endGame) => {
         if(endGame){
             addClassToElement("end-game", PanelDiv);
@@ -52,6 +58,7 @@ function createLevelNotification() {
     return {
         getElement,
         popUp,
-        setLevel
+        setLevel,
+        reset
     }
 }

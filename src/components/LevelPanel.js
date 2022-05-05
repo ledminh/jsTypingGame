@@ -1,4 +1,4 @@
-import { createElement, addElementTo, addClassToElement } from "../utils";
+import { createElement, addElementTo, addClassToElement, removeClassFromElement } from "../utils";
 
 export {
     createLevelPanel
@@ -20,6 +20,12 @@ function createLevelPanel() {
 
 
     const getElement = () => PanelDiv;
+    
+    const reset = () => {
+        removeClassFromElement("end-game", PanelDiv);
+        Label.innerText = "LEVEL ";
+    }
+
     const setLevel = (level, endGame) => {
         if(endGame){
             addClassToElement("end-game", PanelDiv);
@@ -33,6 +39,7 @@ function createLevelPanel() {
 
     return {
         getElement,
-        setLevel
+        setLevel,
+        reset
     }
 }

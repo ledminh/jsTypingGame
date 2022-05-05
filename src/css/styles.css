@@ -40,6 +40,10 @@ body {
 
 }
 
+.hidden {
+    display: none;
+}
+
 .game-over-screen .content-wrapper {
     display: flex;
     flex-flow: row wrap;

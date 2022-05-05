@@ -1,4 +1,4 @@
-import { addElementTo, createElement } from "../utils";
+import { addClassToElement, addElementTo, createElement, removeClassFromElement } from "../utils";
 
 export {
     createGameOverScreen
@@ -6,7 +6,8 @@ export {
 
 function createGameOverScreen(playAgainHandle, quitHandle) {
     const GameOverScreen = createElement("div", "game-over-screen");
-    
+    addClassToElement("hidden", GameOverScreen);
+
     const contentWrapper = createElement("div", "content-wrapper");
     addElementTo(contentWrapper, GameOverScreen);
 
@@ -29,8 +30,12 @@ function createGameOverScreen(playAgainHandle, quitHandle) {
 
     const getElement = () => GameOverScreen;
 
+    const show = () => removeClassFromElement("hidden", GameOverScreen);
+    const hide = () => addClassToElement("hidden", GameOverScreen);
 
     return {
-        getElement
+        getElement,
+        show,
+        hide
     }
 }
