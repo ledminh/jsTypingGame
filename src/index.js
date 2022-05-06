@@ -23,11 +23,12 @@ import { createStartScreen } from "./components/StartScreen";
 import { createLifeControl } from "./components/LifeControl";
 
 import groundImg from './imgs/ground.png';
-import cloudImg from './imgs/cloud.png';
+import { createClouds } from "./components/Clouds";
 
 
 
 let Boxes = [];
+let Clouds = null;
 
 
 //Screens
@@ -233,13 +234,13 @@ const addGround = () => {
 
 }
 
-//TODO
-const addClouds = () => {
-    const cloud = createElement("img", "cloud");
+const setUpClouds = () => {
+    Clouds = createClouds();   
 
-    cloud.src = cloudImg;
-    
-    addElementToBody(cloud);
+    const CloudsElems = Clouds.getClouds();
+
+    console.log(CloudsElems);
+    CloudsElems.forEach(cld => addElementToBody(cld));
 }
 
 const setUpLifePanel = () => {
@@ -322,7 +323,7 @@ function init() {
     setUpAnimation();
 
     addGround();
-    addClouds();
+    setUpClouds();
 }
 
 
