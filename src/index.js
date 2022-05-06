@@ -239,8 +239,7 @@ const setUpClouds = () => {
 
     const CloudsElems = Clouds.getClouds();
 
-    console.log(CloudsElems);
-    CloudsElems.forEach(cld => addElementToBody(cld));
+    CloudsElems.forEach(cld => addElementToBody(cld.getElement()));
 }
 
 const setUpLifePanel = () => {

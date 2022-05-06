@@ -7,7 +7,18 @@ export {
 }
 
 
+function createCloud (cloudImg) {
+    const cloud = createElement("img", "cloud");
+    cloud.src = cloudImg;
 
+    const getElement = () => cloud;
+    
+    
+    
+    return {
+        getElement
+    }
+}
 
 function createClouds() {
     const clouds = [];
@@ -17,12 +28,7 @@ function createClouds() {
     /*******************************
      *  Private functions
      */
-    const _createCloud = (cloudImg) => {
-        const cloud = createElement("img", "cloud");
-        cloud.src = cloudImg;
-
-        return cloud;
-    }
+    const _createCloud = (cloudImg) => createCloud(cloudImg);
 
     const _addCloud = (cloud) => clouds.push(cloud);
 
