@@ -25,6 +25,9 @@ import { createLifeControl } from "./components/LifeControl";
 import groundImg from './imgs/ground.png';
 import { createClouds } from "./components/Clouds";
 
+import sunIMG from './imgs/sun.png';
+
+
 
 
 let Boxes = [];
@@ -105,6 +108,7 @@ const clearBox = () => {
     const stop = () => {
         droppingAnimation.stop();
         addingAnimation.stop();
+        movingCloudAnimation.stop();
     }
 
     function reset() {
@@ -220,6 +224,15 @@ const playButtonStartScreenOnClick = () => {
 
     //DOM Element
 
+const addSun = () =>{
+    const sun = createElement("img", "sun");
+    sun.src = sunIMG;
+
+    sun.style.left = random(0, window.innerWidth*2/3) + "px";
+    
+    addElementToBody(sun);
+}   
+
 const addGround = () => {
     const ground = createElement("div", "ground");
 
@@ -329,6 +342,7 @@ function init() {
 
     addGround();
     setUpClouds();
+    addSun();
 }
 
 

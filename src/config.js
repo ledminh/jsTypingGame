@@ -9,7 +9,7 @@ export {
     MovingCloudTimeInterval
 }
 
-const MovingCloudSpaceInterval = 1;
+const MovingCloudSpaceInterval = 2;
 const MovingCloudTimeInterval = 1;
 
 const GroundHeight = 300;

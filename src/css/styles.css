@@ -26,6 +26,13 @@ body {
 
 }
 
+.sun {
+    position: absolute;
+    top: 0;
+    transform: scale(60%);
+    z-index: -1;
+}
+
 .ground {
     position: absolute;
     bottom: 0;
@@ -36,7 +43,6 @@ body {
 
 .cloud {
     position: absolute;
-    top: 0;
     left: 0;
     height: 300px;
 
@@ -389,22 +395,65 @@ body {
     font-family:cursive;
 }
 
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
 .box {
     position: absolute;
+    top: 200px;
+    left: 200px;
     display: grid;
     align-content: center;
     justify-content: center;
 
     width: 4rem;
     height: 4rem;
-
-    border: 3px solid rgb(0, 0, 0);
+    border: 3px solid rgb(94, 1, 1);
+    box-shadow: 0 0 5px white inset;
     font-size: 2rem;
     padding: 1rem;
     background-color: rgb(110, 0, 0);
     color: white;
 
     opacity: 1;
+
+
+
+}
+
+.box::before {
+    content: "";
+    position: absolute;
+    top: -1rem;
+    left: 8px;
+    background-color: rgb(153, 98, 98);
+    width: 4rem;
+    height: .8rem;
+    box-shadow: 0 0 5px white inset;
+
+
+    transform: skewX(-60deg);
+
+    
+
+}
+
+.box::after {
+    content: "";
+    position: absolute;
+    background-color: rgb(153, 98, 98);
+    right: -1.55rem;
+    top: -0.6rem;
+    width: 1.4rem;
+    height: 4rem;
+
+    transform: skewY(-30deg);
+    box-shadow: 0 0 5px white inset;
+
+    
 
 }
 
