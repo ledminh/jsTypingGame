@@ -224,10 +224,11 @@ const addGround = () => {
     
 
     ground.style.background = `url(${groundImg}) repeat-x`;
-    ground.style.height =  (GroundHeight + 650)  + "px";
-    ground.style.backgroundSize = "cover";
+    ground.style.height =  (GroundHeight + 50)  + "px";
+    ground.style.backgroundSize =  "auto " + " 100%";
 
     addElementToBody(ground);
+
 
 
 }
