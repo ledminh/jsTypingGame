@@ -4,10 +4,13 @@ export {
     DestroyedEffectDuration,
     Level,
     LevelNotifPopUpTime,
-    LifeInitialValue
+    LifeInitialValue,
+    MovingCloudSpaceInterval,
+    MovingCloudTimeInterval
 }
 
-
+const MovingCloudSpaceInterval = 1;
+const MovingCloudTimeInterval = 1;
 
 const GroundHeight = 300;
 const TouchGroundEffectDuration = 300;

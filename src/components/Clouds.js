@@ -1,3 +1,4 @@
+import { random } from 'lodash';
 import cloud1Img from '../imgs/cloud.png';
 
 import { createElement } from "../utils";
@@ -8,15 +9,37 @@ export {
 
 
 function createCloud (cloudImg) {
-    const cloud = createElement("img", "cloud");
-    cloud.src = cloudImg;
+    let cloud = null, cloudWidth = null; 
 
+    const init = () => {
+        cloud = createElement("img", "cloud");
+        cloud.src = cloudImg;
+
+    }   
+    
+
+    
+    /**********PUBLIC FUNCTIONS **********/
     const getElement = () => cloud;
     
+    const setLeft = (leftCoord) => {
+        cloud.style.left = leftCoord + "px";
+
+    };
+
     
+    const getLeft = () => cloud.getBoundingClientRect().left;
+
+
+
     
+    /*****************EXECUTION***********/
+    init();
+
     return {
-        getElement
+        getElement,
+        setLeft,
+        getLeft
     }
 }
 
@@ -39,7 +62,7 @@ function createClouds() {
          
     const getClouds = () => clouds;
 
-
+    const move = (movingInterval) => clouds.forEach(cloud => cloud.setLeft(cloud.getLeft() + movingInterval));
 
     /**********************************/
     /*** EXECUTION ***/
@@ -48,7 +71,8 @@ function createClouds() {
     //_addCloud(_createCloud(cloud2Img));
 
     return {
-        getClouds
+        getClouds,
+        move
     }
 
 }

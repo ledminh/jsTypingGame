@@ -1,4 +1,4 @@
-import _ from "lodash";
+import _, { random } from "lodash";
 
 import "./css/styles.css";
 
@@ -7,7 +7,7 @@ import { ALPHABET_ARR } from "./constants";
 import {addClassToElement, addElementTo, addElementToBody, createElement, onCharacter, onEnter, randomNum, removeClassFromElement, removeElementFromBody} from './utils';
 import { createAnimation } from "./animation";
 import {createBox} from './Box';
-import { AddingTimeInterval, DestroyedEffectDuration, DroppingSpaceInterval, DroppingTimeInterval, GroundHeight, Level, LevelNotifPopUpTime, TouchGroundEffectDuration } from "./config";
+import { AddingTimeInterval, DestroyedEffectDuration, DroppingSpaceInterval, DroppingTimeInterval, GroundHeight, Level, LevelNotifPopUpTime, TouchGroundEffectDuration, MovingCloudSpaceInterval, MovingCloudTimeInterval } from "./config";
 
 
 import { createLevelPanel } from "./components/LevelPanel";
@@ -49,7 +49,8 @@ let LifeControl = null;
 
 // Animations
 let droppingAnimation = null,
-    addingAnimation = null;
+    addingAnimation = null,
+    movingCloudAnimation = null;
 
 
 // Configuration
@@ -239,7 +240,11 @@ const setUpClouds = () => {
 
     const CloudsElems = Clouds.getClouds();
 
-    CloudsElems.forEach(cld => addElementToBody(cld.getElement()));
+    CloudsElems.forEach(cld => {
+        addElementToBody(cld.getElement());
+
+        cld.setLeft(random(0, window.innerWidth - 100));
+    });
 }
 
 const setUpLifePanel = () => {
@@ -291,6 +296,7 @@ const setUpAnimation = () => {
 
     addingAnimation = createAnimation(LevelControl.getAddingTimeInterval(), addBox);
     
+    movingCloudAnimation = createAnimation(MovingCloudTimeInterval, () => Clouds.move(MovingCloudSpaceInterval));
 }
 
     //Adding Listener
@@ -335,6 +341,7 @@ function init() {
 function run() {
     droppingAnimation.run();
     addingAnimation.run();
+    movingCloudAnimation.run();
 }
 
 //***************************************************** */
