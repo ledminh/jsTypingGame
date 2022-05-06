@@ -22,15 +22,9 @@ function createCloud (cloudImg) {
     /**********PUBLIC FUNCTIONS **********/
     const getElement = () => cloud;
     
-    const setLeft = (leftCoord) => {
-        cloud.style.left = leftCoord + "px";
-
-    };
-
+    const setLeft = (leftCoord) => cloud.style.left = leftCoord + "px";
     
     const getLeft = () => cloud.getBoundingClientRect().left;
-
-
 
     
     /*****************EXECUTION***********/

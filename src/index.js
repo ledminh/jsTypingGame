@@ -1,13 +1,13 @@
-import _, { random } from "lodash";
+import  { random } from "lodash";
 
 import "./css/styles.css";
 
 import { ALPHABET_ARR } from "./constants";
 
-import {addClassToElement, addElementTo, addElementToBody, createElement, onCharacter, onEnter, randomNum, removeClassFromElement, removeElementFromBody} from './utils';
+import {addElementToBody, createElement, onCharacter,  randomNum,  removeElementFromBody} from './utils';
 import { createAnimation } from "./animation";
 import {createBox} from './Box';
-import { AddingTimeInterval, DestroyedEffectDuration, DroppingSpaceInterval, DroppingTimeInterval, GroundHeight, Level, LevelNotifPopUpTime, TouchGroundEffectDuration, MovingCloudSpaceInterval, MovingCloudTimeInterval } from "./config";
+import { DestroyedEffectDuration, GroundHeight, TouchGroundEffectDuration, MovingCloudSpaceInterval, MovingCloudTimeInterval } from "./config";
 
 
 import { createLevelPanel } from "./components/LevelPanel";
