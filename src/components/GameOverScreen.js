@@ -14,6 +14,14 @@ function createCreditScreen() {
     const authorLine = createElement("h3", "author", "This game is created by Minh Le");
     addElementTo(authorLine, creditScreen);
 
+    const creditLine = createElement("div", "other-credits");
+    addElementTo(creditLine, creditScreen);
+
+    creditLine.innerHTML = `<p>Music from Uppbeat (https://uppbeat.io/t/hartzmann/sunny)</p>    
+                            <p>License code: 9OWFUTHDBK9DYJSQ</p>`
+
+
+
     const contactList = createElement("div", "contact-list");
     addElementTo(contactList, creditScreen);
 
