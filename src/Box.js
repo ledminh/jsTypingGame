@@ -1,5 +1,6 @@
-import { random } from "lodash";
-import { createElement } from "./utils";
+import { random, set } from "lodash";
+import { GroundHeight } from "./config";
+import { addElementTo, createElement } from "./utils";
 
 export {
     createBox
@@ -9,24 +10,27 @@ export {
 
 function createBox(boxName) {
     //Initialize
+    const Wrapper = createElement('div', 'box-wrapper');
     const Box = createElement('div', "box", boxName);
-    Box.style.zIndex = random(1,3);
+    addElementTo(Box, Wrapper);
+
+    Wrapper.style.zIndex = random(1,3);
 
 
     const speedParam = random(.8, 1.1);
 
     //Private functions
-    const getRadius = () => Box.getBoundingClientRect().width/2;
-    const getLeft = () => Box.getBoundingClientRect().left;
-    const getTop = () => Box.getBoundingClientRect().top;
+    const getRadius = () => Wrapper.getBoundingClientRect().width/2;
+    const getLeft = () => Wrapper.getBoundingClientRect().left;
+    const getTop = () =>  Wrapper.getBoundingClientRect().top;
 
-    const setXCoord = (xCoord) => Box.style.left = (xCoord - getRadius()) + "px"; 
-    const setYCoord = (yCoord) => Box.style.top = (yCoord - getRadius()) + "px";
+    const setXCoord = (xCoord) => Wrapper.style.left = (xCoord - getRadius()) + "px"; 
+    const setYCoord = (yCoord) => Wrapper.style.top = (yCoord - getRadius()) + "px";
 
 
 
     //Public functions
-    const getElement = () => Box;
+    const getElement = () => Wrapper;
     const getName = () => boxName;
     const getSpeedParam = () => speedParam;
 
@@ -52,6 +56,8 @@ function createBox(boxName) {
         return distanceSqrt <= (thisRadius + otherRadius)*(thisRadius + otherRadius); 
 
     }
+
+    
 
     return {
         getElement,
