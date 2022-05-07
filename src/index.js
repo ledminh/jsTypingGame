@@ -139,7 +139,7 @@ const clearBox = () => {
 const dropping = () => {
     Boxes.forEach(b => {
         const center = b.getCenter();
-        const nextY = center.y + droppingSpaceInterval;
+        const nextY = center.y + droppingSpaceInterval*b.getSpeedParam();
 
         b.setPos(center.x, nextY);
     });
@@ -189,7 +189,7 @@ const onType = (char) => {
         
         if(!b.hasClass("to-be-destroyed") && boxName == char){
             SoundControl.playPoppingSound();
-            
+
             LifeControl.addLife();
             lifePanel.updateLife(LifeControl.getLife());
 

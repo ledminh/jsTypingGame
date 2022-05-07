@@ -1,3 +1,4 @@
+import { random } from "lodash";
 import { createElement } from "./utils";
 
 export {
@@ -9,6 +10,10 @@ export {
 function createBox(boxName) {
     //Initialize
     const Box = createElement('div', "box", boxName);
+    Box.style.zIndex = random(1,3);
+
+
+    const speedParam = random(.8, 1.1);
 
     //Private functions
     const getRadius = () => Box.getBoundingClientRect().width/2;
@@ -23,6 +28,7 @@ function createBox(boxName) {
     //Public functions
     const getElement = () => Box;
     const getName = () => boxName;
+    const getSpeedParam = () => speedParam;
 
     const setClass = (className) => Box.classList.add(className);
     const hasClass = (className) => Box.classList.contains(className);
@@ -55,7 +61,8 @@ function createBox(boxName) {
         getCenter,
         getRadius,
         isTouch,
-        getName
+        getName,
+        getSpeedParam
     }
 }
 
