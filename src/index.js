@@ -28,7 +28,7 @@ import { createClouds } from "./components/Clouds";
 import sunIMG from './imgs/sun.png';
 
 
-
+import {createSoundControl} from "./SoundControl";
 
 let Boxes = [];
 let Clouds = null;
@@ -48,6 +48,7 @@ let LevelNotif = null;
 // Control
 let LevelControl = null;
 let LifeControl = null;
+let SoundControl = null;
 
 
 // Animations
@@ -167,6 +168,7 @@ const touchGround = () => {
         const centerY = b.getCenter().y;
 
         if(!b.hasClass("touch-ground") && centerY >= window.innerHeight - GroundHeight){
+            SoundControl.playDroppingSound();
             LifeControl.minusLife();
             lifePanel.updateLife(LifeControl.getLife());
 
@@ -186,6 +188,8 @@ const onType = (char) => {
         const boxName = b.getName();
         
         if(!b.hasClass("to-be-destroyed") && boxName == char){
+            SoundControl.playPoppingSound();
+            
             LifeControl.addLife();
             lifePanel.updateLife(LifeControl.getLife());
 
@@ -302,6 +306,10 @@ const setupLifeControl = () => {
     LifeControl = createLifeControl();  
 }
 
+const setUpSoundControl = () => {
+    SoundControl = createSoundControl();
+}
+
 
     //Animation
 const setUpAnimation = () => {
@@ -343,6 +351,8 @@ function init() {
     addGround();
     setUpClouds();
     addSun();
+
+    setUpSoundControl();
 }
 
 
@@ -356,6 +366,8 @@ function run() {
     droppingAnimation.run();
     addingAnimation.run();
     movingCloudAnimation.run();
+
+    SoundControl.playBackgroundMusic();
 }
 
 //***************************************************** */
