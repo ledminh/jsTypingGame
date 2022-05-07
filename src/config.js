@@ -24,55 +24,7 @@ const LevelNotifPopUpTime = 600;
 const LifeInitialValue = 10;
 
 const Level = [
-    {
-        life: 10,
-        droppingSpaceInterval: 2,
-        droppingTimeInterval: 10,
-        addingTimeInterval:1700
-    },
-
-    {
-        life: 30,
-        droppingSpaceInterval: 2,
-        droppingTimeInterval: 5,
-        addingTimeInterval:1500
-    },
-
-    {
-        life: 100,
-        droppingSpaceInterval: 3,
-        droppingTimeInterval: 5,
-        addingTimeInterval: 1400
-    },
-
-    {
-        life: 200,
-        droppingSpaceInterval: 4,
-        droppingTimeInterval: 5,
-        addingTimeInterval: 1200
-    },
-
-    {
-        life: 350,
-        droppingSpaceInterval: 4,
-        droppingTimeInterval: 4,
-        addingTimeInterval: 1000
-    },
-
-    {
-        life: 520,
-        droppingSpaceInterval: 5,
-        droppingTimeInterval: 4,
-        addingTimeInterval: 900
-    },
-
-    {
-        life: 700,
-        droppingSpaceInterval: 5,
-        droppingTimeInterval: 4,
-        addingTimeInterval: 600
-    },
-
+    
     {
         life: 850,
         droppingSpaceInterval: 5,

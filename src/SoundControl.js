@@ -50,8 +50,19 @@ function createSoundControl() {
     /******Public Functions********************/
     const playBackgroundMusic = () => play(background, true)
     
-    const playDroppingSound = () => play(dropping, false);
-    const playPoppingSound = () => play(popping, false);    
+    const playDroppingSound = () => {
+        const sound = createSound(audioContext, droppingSoundFile, 3);
+        play(sound, false);   
+    }
+
+    const playPoppingSound = () => {
+        const sound = createSound(audioContext, poppingSoundFile, 3);
+        play(sound, false);    
+
+    }
+    
+    
+    
 
     /******Execution********************/
     init();
