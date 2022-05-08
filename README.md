@@ -2,4 +2,10 @@
 
 A simple game to practice typing on computer keyboard.
 
-## Work in progress ...
+## TECHS USED
+
+Vanila JS, Webpack, lodash library.
+
+## DEMO
+
+https://ledminh.github.io/typing-fast/
