@@ -284,6 +284,16 @@ const setupLevelNotif = () => {
     LevelNotif.setLevel(LevelControl.getLevel());
 }
 
+function setupComponents() {
+    setUpLifePanel();
+    setUpLevelPanel();
+    setupLevelNotif();
+
+    addGround();
+    setUpClouds();
+    addSun();
+}
+
 
 const setUpGameOverScreen = () => {
     GameOverScreen = createGameOverScreen(playAgainHandle);
@@ -294,6 +304,11 @@ const setUpStartScreen = () => {
     StartScreen = createStartScreen(playButtonStartScreenOnClick);
     
     addElementToBody(StartScreen.getElement());
+}
+
+function setupScreens() {
+    setUpStartScreen();
+    setUpGameOverScreen();
 }
 
     // Control Unit
@@ -336,29 +351,17 @@ const addTypingListener = () => {
 
 function init() {
     setupControls();
+    setupComponents();
+    setupScreens();
+    setUpAnimation();
 
-    
-
-    setUpLifePanel();
-    
-
-    
-    setUpLevelPanel();
 
     addTypingListener();
     
-    setupLevelNotif();
+    
+
 
     
-    setUpStartScreen();
-
-    setUpGameOverScreen();
-
-    setUpAnimation();
-
-    addGround();
-    setUpClouds();
-    addSun();
 
 
 }
