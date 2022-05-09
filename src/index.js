@@ -131,6 +131,7 @@ const clearBox = () => {
     function reRun() {
         droppingAnimation.reRun();
         addingAnimation.reRun();
+        movingCloudAnimation.reRun();
     }
 
     // *************************
@@ -357,12 +358,6 @@ function init() {
 
 
     addTypingListener();
-    
-    
-
-
-    
-
 
 }
 
