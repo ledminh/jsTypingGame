@@ -1,11 +1,11 @@
-import { LifeInitialValue } from "../config";
+import { getLifeInitialValue } from "../config";
 
 export {
     createLifeControl
 }
 
 function createLifeControl() {
-    let life = LifeInitialValue;
+    let life = getLifeInitialValue();
 
     const getLife = () => life;
     const addLife = () => life++;
@@ -13,7 +13,7 @@ function createLifeControl() {
 
     const isGameOver = () => life == 0;
 
-    const reset = () => life = LifeInitialValue;
+    const reset = () => life = getLifeInitialValue();
 
     return {
         getLife,

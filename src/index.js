@@ -214,6 +214,7 @@ const onLevelChange = (level) => {
 const playAgainHandle = () => {
     reset();
     GameOverScreen.hide();
+    
     reRun();
 }
 
@@ -310,6 +311,11 @@ const setUpSoundControl = () => {
     SoundControl = createSoundControl();
 }
 
+function setupControls() {
+    setupLifeControl();
+    setUpLevelControl();
+    setUpSoundControl();
+}
 
     //Animation
 const setUpAnimation = () => {
@@ -329,12 +335,14 @@ const addTypingListener = () => {
 
 
 function init() {
-    setupLifeControl();
+    setupControls();
+
+    
+
     setUpLifePanel();
     
 
-    setUpLevelControl();
-
+    
     setUpLevelPanel();
 
     addTypingListener();
@@ -352,7 +360,7 @@ function init() {
     setUpClouds();
     addSun();
 
-    setUpSoundControl();
+
 }
 
 
