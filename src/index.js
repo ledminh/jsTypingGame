@@ -117,9 +117,13 @@ const clearBox = () => {
         lifePanel.updateLife(LifeControl.getLife());
 
         LevelControl.reset();
+        droppingAnimation.setTimeInterval(LevelControl.getDroppingTimeInterval());
+        addingAnimation.setTimeInterval(LevelControl.getAddingTimeInterval());
+        droppingSpaceInterval = LevelControl.getDroppingSpaceInterval();
 
         LevelPanel.reset();
         LevelPanel.setLevel(LevelControl.getLevel(), LevelControl.isEndGame());
+        
 
         LevelNotif.reset();
 

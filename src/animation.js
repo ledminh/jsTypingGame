@@ -29,6 +29,7 @@ function createAnimation(timeIntervalUserDefined, ...animates) {
     };
 
     const _stopFunc =  () => stop = true;
+    
     const reRun = () => {
         stop = false;
         run();
