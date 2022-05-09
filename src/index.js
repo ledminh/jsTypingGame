@@ -334,7 +334,7 @@ function setupControls() {
 }
 
     //Animation
-const setUpAnimation = () => {
+const setupAnimation = () => {
     droppingAnimation = createAnimation(LevelControl.getDroppingTimeInterval(), () => dropping(droppingSpaceInterval), touchGround);
 
     addingAnimation = createAnimation(LevelControl.getAddingTimeInterval(), addBox);
@@ -354,10 +354,12 @@ function init() {
     setupControls();
     setupComponents();
     setupScreens();
-    setUpAnimation();
+    setupAnimation();
 
 
     addTypingListener();
+
+    
 
 }
 
