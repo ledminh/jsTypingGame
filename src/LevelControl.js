@@ -62,7 +62,7 @@ function createLevelControl(afterInit, onLevelChange) {
     
     /*******************************************/
 
-    init();
+    
 
     return {
         getDroppingSpaceInterval,

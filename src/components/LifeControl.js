@@ -22,7 +22,7 @@ function createLifeControl(afterInit) {
 
     /********************************/
     
-    init();
+    
     
     return {
         getLife,

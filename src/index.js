@@ -83,8 +83,7 @@ const stop = () => {
 }
 
 function reset() {    
-    LifeControl.init();
-    LevelControl.init();
+    initControls();
   
     clearBox();
 
@@ -114,9 +113,6 @@ const removeBox = (box) => {
 //***************************************************** */
 // Event Listenners
 //***************************************************** */
-
-
-
 
 const onLevelChange = (level) => {
     droppingAnimation.setTimeInterval(LevelControl.getDroppingTimeInterval());
@@ -273,6 +269,11 @@ function createControls() {
 
 }
 
+function initControls() {
+    LifeControl.init();
+    LevelControl.init();
+}
+
 
 
 //***************************************************** */
@@ -364,6 +365,7 @@ function init() {
     createAnimations();
 
     createControls();
+    initControls();
 
     createScreens();
     addScreens();
