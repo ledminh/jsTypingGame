@@ -1,4 +1,4 @@
-import { getLifeInitialValue } from "../config";
+import { getLifeInitialValue } from "./config";
 
 export {
     createLifeControl

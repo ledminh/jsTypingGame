@@ -20,7 +20,7 @@ import { createGameOverScreen } from "./components/GameOverScreen";
 
 import { createStartScreen } from "./components/StartScreen";
 
-import { createLifeControl } from "./components/LifeControl";
+import { createLifeControl } from "./LifeControl";
 
 import groundImg from './imgs/ground.png';
 import { createClouds } from "./components/Clouds";
