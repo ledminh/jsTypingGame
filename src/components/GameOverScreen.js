@@ -17,8 +17,9 @@ function createCreditScreen() {
     const creditLine = createElement("div", "other-credits");
     addElementTo(creditLine, creditScreen);
 
-    creditLine.innerHTML = `<p>Music from Uppbeat (https://uppbeat.io/t/hartzmann/sunny)</p>    
-                            <p>License code: 9OWFUTHDBK9DYJSQ</p>`
+    creditLine.innerHTML = `<p>Music: 
+                            <p>Uppbeat (https://uppbeat.io/t/hartzmann/sunny) - License code: 9OWFUTHDBK9DYJSQ</p>    
+                            <p>and www.bensound.com</p>`
 
 
 
