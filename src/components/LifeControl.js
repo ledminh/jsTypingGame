@@ -4,8 +4,8 @@ export {
     createLifeControl
 }
 
-function createLifeControl() {
-    let life = getLifeInitialValue();
+function createLifeControl(afterInit) {
+    let life = null;
 
     const getLife = () => life;
     const addLife = () => life++;
@@ -13,8 +13,17 @@ function createLifeControl() {
 
     const isGameOver = () => life == 0;
 
-    const reset = () => life = getLifeInitialValue();
+    const init = () => {
+        life = getLifeInitialValue();
+        afterInit(life);
+    }
 
+    const reset = () => init();
+
+    /********************************/
+    
+    init();
+    
     return {
         getLife,
         addLife,

@@ -1,4 +1,4 @@
-import  { random } from "lodash";
+import  { create, random } from "lodash";
 
 import "./css/styles.css";
 
@@ -31,7 +31,7 @@ import sunIMG from './imgs/sun.png';
 import {createSoundControl} from "./SoundControl";
 
 let Boxes = [];
-let Clouds = null;
+
 
 
 //Screens
@@ -39,11 +39,16 @@ let GameOverScreen = null;
 let StartScreen = null;
 
 
-//Panels
-let lifePanel = null;
+//Components
+    //Panels
+let LifePanel = null;
 let LevelPanel = null;
 let LevelNotif = null;
 
+    //Background components
+let Clouds = null;
+let Sun = null;
+let Ground = null;
 
 // Control
 let LevelControl = null;
@@ -114,7 +119,7 @@ const clearBox = () => {
 
     function reset() {
         LifeControl.reset();
-        lifePanel.updateLife(LifeControl.getLife());
+        LifePanel.updateLife(LifeControl.getLife());
 
         LevelControl.reset();
         droppingAnimation.setTimeInterval(LevelControl.getDroppingTimeInterval());
@@ -175,7 +180,7 @@ const touchGround = () => {
         if(!b.hasClass("touch-ground") && centerY >= window.innerHeight - GroundHeight){
             SoundControl.playDroppingSound();
             LifeControl.minusLife();
-            lifePanel.updateLife(LifeControl.getLife());
+            LifePanel.updateLife(LifeControl.getLife());
 
             b.setClass("touch-ground");
             setTimeout(() => removeBox(b), TouchGroundEffectDuration + 10);
@@ -188,23 +193,7 @@ const touchGround = () => {
     })
 }
 
-const onType = (char) => {
-    Boxes.forEach(b => {
-        const boxName = b.getName();
-        
-        if(!b.hasClass("to-be-destroyed") && boxName == char){
-            SoundControl.playPoppingSound();
 
-            LifeControl.addLife();
-            lifePanel.updateLife(LifeControl.getLife());
-
-            LevelControl.setLevel(LifeControl.getLife());
-
-            b.setClass("to-be-destroyed");
-            setTimeout(() => removeBox(b), DestroyedEffectDuration);
-        }
-    })
-}
 
 const onLevelChange = (level) => {
     droppingAnimation.setTimeInterval(LevelControl.getDroppingTimeInterval());
@@ -232,148 +221,174 @@ const playButtonStartScreenOnClick = () => {
 // Init
 //***************************************************** */
 
-    //DOM Element
+    //Components
 
-const addSun = () =>{
+const createSun = () =>{
     const sun = createElement("img", "sun");
     sun.src = sunIMG;
-
     sun.style.left = random(0, window.innerWidth*2/3) + "px";
     
-    addElementToBody(sun);
+    return sun;
+    
 }   
 
-const addGround = () => {
+const createGround = () => {
     const ground = createElement("div", "ground");
 
     
-
     ground.style.background = `url(${groundImg}) repeat-x`;
     ground.style.height =  (GroundHeight + 50)  + "px";
     ground.style.backgroundSize =  "auto " + " 100%";
 
-    addElementToBody(ground);
 
-
+    return ground;
+    
+    
 
 }
 
-const setUpClouds = () => {
-    Clouds = createClouds();   
-
+const addCloudsToBody = () => {
     const CloudsElems = Clouds.getClouds();
 
     CloudsElems.forEach(cld => {
-        addElementToBody(cld.getElement());
-
-        cld.setLeft(random(0, window.innerWidth - 100));
+        addElementToBody(cld.getElement());     
     });
 }
 
-const setUpLifePanel = () => {
-    lifePanel = createLifePanel();
-    lifePanel.updateLife(LifeControl.getLife());
-    addElementToBody(lifePanel.getElement());
 
-}
+function createComponents() {
+    Sun = createSun();
+    Ground = createGround();
+    Clouds = createClouds();
 
-const setUpLevelPanel = () => {
+    LifePanel = createLifePanel();
     LevelPanel = createLevelPanel();
-    addElementToBody(LevelPanel.getElement());
-    LevelPanel.setLevel(LevelControl.getLevel());
-}
-
-const setupLevelNotif = () => {
     LevelNotif = createLevelNotification();
+
+}
+
+function addComponents() {
+    addElementToBody(Sun);
+    addElementToBody(Ground);
+    addCloudsToBody();
+
+    addElementToBody(LifePanel.getElement());
+    addElementToBody(LevelPanel.getElement());
     addElementToBody(LevelNotif.getElement());
-    LevelNotif.setLevel(LevelControl.getLevel());
-}
 
-function setupComponents() {
-    setUpLifePanel();
-    setUpLevelPanel();
-    setupLevelNotif();
-
-    addGround();
-    setUpClouds();
-    addSun();
 }
 
 
-const setUpGameOverScreen = () => {
+
+    //Screens
+
+function createScreens() {
+    StartScreen = createStartScreen(playButtonStartScreenOnClick);
     GameOverScreen = createGameOverScreen(playAgainHandle);
+}
+
+function addScreens() {
+    addElementToBody(StartScreen.getElement());
     addElementToBody(GameOverScreen.getElement());
 }
 
-const setUpStartScreen = () => {
-    StartScreen = createStartScreen(playButtonStartScreenOnClick);
-    
-    addElementToBody(StartScreen.getElement());
-}
 
-function setupScreens() {
-    setUpStartScreen();
-    setUpGameOverScreen();
-}
 
     // Control Unit
-const setUpLevelControl = () => {
-    LevelControl = createLevelControl(onLevelChange);
-    droppingSpaceInterval = LevelControl.getDroppingSpaceInterval();
+const afterInitLifeControl = (life) => {
 
+    LifePanel.updateLife(life);  
 }
 
-const setupLifeControl = () => {
-    LifeControl = createLifeControl();  
-}
-
-const setUpSoundControl = () => {
-    SoundControl = createSoundControl();
-}
-
-function setupControls() {
-    setupLifeControl();
-    setUpLevelControl();
-    setUpSoundControl();
-}
-
-    //Animation
-const setupAnimation = () => {
-    droppingAnimation = createAnimation(LevelControl.getDroppingTimeInterval(), () => dropping(droppingSpaceInterval), touchGround);
-
-    addingAnimation = createAnimation(LevelControl.getAddingTimeInterval(), addBox);
+const afterInitLevelControl = (level, droppingSpaceItv, droppingTimeItv, addingTimeItv) => {
     
-    movingCloudAnimation = createAnimation(MovingCloudTimeInterval, () => Clouds.move(MovingCloudSpaceInterval));
+    //Update Level on Panel
+    LevelPanel.setLevel(level);
+    LevelNotif.setLevel(level);
+
+    //Update animations
+    droppingSpaceInterval = droppingSpaceItv;
+    droppingAnimation.setTimeInterval(droppingTimeItv);
+
+    addingAnimation.setTimeInterval(addingTimeItv);
+}
+    
+function createControls() {
+    LevelControl = createLevelControl(afterInitLevelControl, onLevelChange);
+    LifeControl = createLifeControl(afterInitLifeControl);  
+
+    SoundControl = createSoundControl();
+
 }
 
-    //Adding Listener
-const addTypingListener = () => {
+
+
+    //Animations
+const createAnimations = () => {
+    droppingAnimation = createAnimation(() => dropping(droppingSpaceInterval), touchGround);  
+
+    addingAnimation = createAnimation(addBox);
+    
+    movingCloudAnimation = createAnimation(() => Clouds.move(MovingCloudSpaceInterval));
+    movingCloudAnimation.setTimeInterval(MovingCloudTimeInterval);
+}
+
+//***************************************************** */
+// Listeners
+//***************************************************** */
+const onType = (char) => {
+    Boxes.forEach(b => {
+        const boxName = b.getName();
+        
+        if(!b.hasClass("to-be-destroyed") && boxName == char){
+            SoundControl.playPoppingSound();
+
+            LifeControl.addLife();
+            LifePanel.updateLife(LifeControl.getLife());
+
+            LevelControl.setLevel(LifeControl.getLife());
+
+            b.setClass("to-be-destroyed");
+            setTimeout(() => removeBox(b), DestroyedEffectDuration);
+        }
+    })
+}
+
+const addListeners = () => {
     onCharacter(document.body, (char) => onType(char.toUpperCase()));
 }
 
 
+//***************************************************** */
+// Execution Functions
+//***************************************************** */
+    
 
-
+    /******************
+     * INIT
+     * ****************/
 function init() {
-    setupControls();
-    setupComponents();
-    setupScreens();
-    setupAnimation();
+    createComponents();
+    addComponents();
+
+    createAnimations();
+
+    createControls();
+
+    createScreens();
+    addScreens();
 
 
-    addTypingListener();
+    addListeners();
 
     
 
 }
 
 
-
-
-//***************************************************** */
-// Run
-//***************************************************** */
-
+    /******************
+     * RUN
+     * ****************/
 function run() {
     droppingAnimation.run();
     addingAnimation.run();
@@ -382,11 +397,10 @@ function run() {
     SoundControl.playBackgroundMusic();
 }
 
-//***************************************************** */
-// Game Over
-//***************************************************** */
 
-
+    /******************
+     * GAME OVER
+     * ****************/
 function gameOver()  {
     stop();
     GameOverScreen.show();
@@ -394,9 +408,15 @@ function gameOver()  {
 
 
 
-/***************************************
- * Execution 
- */
+
+
+
+
+
+//***************************************************** */
+// EXECUTION
+//***************************************************** */
+
 init();
 
 

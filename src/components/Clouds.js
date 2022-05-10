@@ -19,6 +19,7 @@ function createCloud (cloudImg) {
         cloud.src = cloudImg;
         
         cloud.style.top = random(0,100) + "px";
+        cloud.style.left = random(0, window.innerWidth - 100) + "px";
         cloud.style.height = `${random(100, 400)}px`;
 
     }   

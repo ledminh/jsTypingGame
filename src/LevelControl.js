@@ -1,3 +1,4 @@
+import { after } from "lodash";
 import { Level } from "./config";
 
 export {
@@ -7,21 +8,24 @@ export {
 
 
 
-function createLevelControl(onLevelChange) {
+function createLevelControl(afterInit, onLevelChange) {
     
     
-    let currentLevel = 1;
+    let currentLevel = null;
     
     let droppingSpaceInterval = null,
     droppingTimeInterval = null,
     addingTimeInterval = null;
 
     function init() {
+        currentLevel = 1;
         let levelObj = getLevelObject();
 
         droppingSpaceInterval = levelObj.droppingSpaceInterval;
         droppingTimeInterval = levelObj.droppingTimeInterval;
         addingTimeInterval = levelObj.addingTimeInterval;
+
+        afterInit(currentLevel, droppingSpaceInterval, droppingTimeInterval, addingTimeInterval);
 
     }
     
@@ -40,7 +44,6 @@ function createLevelControl(onLevelChange) {
     const getLevel = () => currentLevel;
 
     function reset() {
-        currentLevel = 1;
         init();
     }
 
