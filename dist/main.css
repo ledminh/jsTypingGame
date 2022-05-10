@@ -1,0 +1,524 @@
+@import url(https://fonts.googleapis.com/css2?family=Londrina+Outline&display=swap);
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    position: relative;
+    display:flex;
+
+    justify-content:center;
+    align-items:center;
+
+    overflow: hidden;
+
+    background-color: #87ceeb;
+
+
+
+}
+
+.sun {
+    position: absolute;
+    top: 0;
+    transform: scale(60%);
+    z-index: -1;
+}
+
+.ground {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    
+}
+
+.cloud {
+    position: absolute;
+    left: 0;
+    height: 300px;
+
+    z-index: 2;
+}
+
+.ground .img-div {
+    border: 5px solid yellowgreen;
+    
+}
+
+.start-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    z-index: 10000;
+}
+
+.start-screen .content-wrapper {
+    width: 80%;
+    max-width: 1200px;
+    min-width: 400px;
+    text-align: center;
+
+    border: 4px solid rgb(83, 6, 6);
+    border-radius: 20px;
+    padding: 2rem;
+
+    background-color: rgba(179, 179, 179, .9);
+
+    box-shadow: 0 0 10px black;
+}
+
+
+.start-screen .content-wrapper h1 {
+    font-size: 5rem;
+    font-family: cursive;
+    color:rgb(83, 6, 6);
+
+}
+
+.start-screen .content-wrapper h4 {
+    font-size: 1.4rem;
+
+    color: rgb(5, 121, 82);
+
+    margin-bottom: 1.5rem;
+
+}
+
+
+.start-screen .content-wrapper .intro {
+    font-size: 1.4rem;
+    font-family: monospace;
+}
+
+.start-screen .content-wrapper .intro p {
+    margin-bottom: 1.5rem;
+}
+
+
+.start-screen .content-wrapper .intro p.emphasize {
+    font-weight: bold;
+    color: rgb(173, 36, 36);
+    font-size: 120%;
+}
+
+.start-screen .content-wrapper button.play {
+    font-size: 1.5rem;
+    padding: 1rem;
+
+    border: none;
+    
+    border-radius: 20px;
+    background-color: aquamarine;
+
+}
+
+.start-screen .content-wrapper button.play:hover {
+    background-color: rgb(101, 219, 180);
+}
+
+.start-screen .content-wrapper button.play:active {
+    background-color: rgb(125, 185, 165);
+}
+
+.game-over-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: rgba(0,0,0,.92);
+
+    z-index: 10000000000000;
+
+
+}
+
+.game-over-screen .credit-screen {
+    border: 2px solid white;
+    border-radius: 20px;
+    padding: 2rem;
+    color: rgb(209, 184, 184);
+    font-size: 1.2rem;
+
+    text-align: center;
+}
+
+.game-over-screen .credit-screen h2 {
+    color: rgb(209, 209, 209);
+    font-size: 3rem;
+    font-family: cursive;
+
+    margin-bottom: 2rem;
+}
+
+.game-over-screen .credit-screen h3 {
+    color: rgb(221, 118, 118);
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.game-over-screen .credit-screen ul {
+    list-style-type: none;
+}
+
+.game-over-screen .credit-screen li {
+    margin-top: .5rem;
+}
+
+.game-over-screen .credit-screen a {
+    color:rgb(39, 133, 133);
+    
+}
+
+.game-over-screen .credit-screen a:visited {
+    color:rgb(53, 167, 167);
+}
+
+.game-over-screen .credit-screen .other-credits {
+    margin-bottom: 1rem;
+    font-style: italic;
+}
+
+
+.hidden {
+    
+    display: none;
+}
+
+.game-over-screen .content-wrapper {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.game-over-screen .text {
+    font-size: 4.5rem;
+    font-family: cursive;
+    font-weight: bold;
+    
+    text-align: center;
+    color: rgb(216, 10, 10);
+
+    margin-bottom: 2rem;
+
+}
+
+.game-over-screen .buttons {
+    width: 100%;
+    text-align: center;
+}
+
+.game-over-screen button {
+    padding: 1rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    font-family: cursive;
+
+    border: none;
+
+    border-radius: 20px;
+
+}
+
+.game-over-screen button.play-again {
+    margin-right: 2rem;
+
+    background-color: rgb(68, 124, 85);
+    color: aliceblue;
+}
+
+.game-over-screen button.play-again:hover {
+    background-color: rgb(97, 170, 119);
+    
+}
+
+
+.game-over-screen button.play-again:active {
+    background-color: rgb(85, 145, 103);
+    
+}
+
+.game-over-screen button.quit {
+    background-color: rgb(110, 38, 38);
+    color: aliceblue;
+}
+
+.game-over-screen button.quit:hover {
+    background-color: rgb(153, 51, 51);
+    
+}
+
+.game-over-screen button.quit:active {
+    background-color: rgb(117, 37, 37);
+    
+}
+
+.level-notif {
+    font-family: 'Londrina Outline', cursive;
+    font-size: 7rem;
+    font-weight: bold;
+    color:rgb(161, 0, 0);
+    z-index: 10000;
+
+    opacity: 0;
+
+}
+
+.level-notif.end-game {
+    background-color: brown;
+    color: white;
+    padding: 1rem;
+    
+}
+
+.level-notif.end-game .content-wrapper {
+    border: 7px double white;
+    padding: 1rem;
+}
+
+@keyframes LevelNotifPopup {
+    0% {
+        opacity: 1
+    }
+
+    50% {
+        opacity: .5;
+        transform: scale(1.5);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(2);
+    }
+}
+
+
+.level-notif.pop-up {
+    animation: LevelNotifPopup .6s linear;
+}
+
+.level-panel {
+    position: absolute;
+    top: 5.5rem;
+    right: 0;
+
+    display: grid;
+    justify-items: center;
+    align-items: center;
+
+    background-color: rgb(5, 121, 82);
+
+    
+    padding: 0.5rem;
+
+    z-index: 10000;
+}
+
+.level-panel.end-game {
+    background-color: brown;
+}
+
+.level-panel .content-wrapper {
+    
+    border: 10px double rgb(219, 219, 219);
+    padding: 0.5rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+
+
+    color: rgb(237, 242, 245);
+
+
+}
+
+.life-panel {
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    
+    display: flex;
+    flex-flow: row nowrap;
+    
+    width: 12rem;
+    height: 3rem;
+    border-radius: 1.5rem;
+
+    font-size: 2rem;
+    border: 3px solid black;
+    box-shadow: 0 0 5px black;
+    
+    overflow: hidden;
+
+    z-index: 10000;
+}
+
+.life-panel .label,
+.life-panel .life {
+    display: grid;
+    align-items: center;
+    text-align: center;
+    width: 50%;
+    height: 100%;
+    text-align: center;
+    
+       
+}
+
+.life-panel .label {
+    background-color: rgb(94, 0, 0);
+    color: white;
+    box-shadow: 0 0 5px white inset;
+
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.life-panel .life {
+    background-color: blanchedalmond;
+    font-weight: bold;
+    font-family:cursive;
+}
+
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+.box-wrapper {
+    position: absolute;
+    
+}
+
+.box {
+    position: absolute;
+    display: grid;
+    align-content: center;
+    justify-content: center;
+
+    width: 4rem;
+    height: 4rem;
+    border: 3px solid rgb(94, 1, 1);
+    box-shadow: 0 0 5px white inset;
+    font-size: 2rem;
+    padding: 1rem;
+    background-color: rgb(110, 0, 0);
+    color: white;
+
+    opacity: 1;
+
+
+
+}
+
+.box::before {
+    content: "";
+    position: absolute;
+    top: -1rem;
+    left: 8px;
+    background-color: rgb(153, 98, 98);
+    width: 4rem;
+    height: .8rem;
+    box-shadow: 0 0 5px white inset;
+
+
+    transform: skewX(-60deg);
+
+    
+
+}
+
+.box::after {
+    content: "";
+    position: absolute;
+    background-color: rgb(153, 98, 98);
+    right: -1.55rem;
+    top: -0.6rem;
+    width: 1.4rem;
+    height: 4rem;
+
+    transform: skewY(-30deg);
+    box-shadow: 0 0 5px white inset;
+
+    
+
+}
+
+
+@keyframes destroyedAnimation {
+    100% {
+        opacity: 0;
+        transform: scale(1.5) rotateZ(60deg);
+    }
+
+}
+
+@keyframes destroyedAnimationForBefore {
+    100% {
+        opacity: 0;
+        transform: scale(1) translateY(-100%);
+    }
+
+}
+
+@keyframes destroyedAnimationForAfter {
+    100% {
+        opacity: 0;
+        transform: scale(1) translateX(100%);
+    }
+
+}
+
+.to-be-destroyed {
+    animation: destroyedAnimation .3s;
+}
+
+.to-be-destroyed::before {
+    animation: destroyedAnimationForBefore .3s;
+}
+
+.to-be-destroyed::after {
+    animation: destroyedAnimationForAfter .3s;
+}
+
+
+@keyframes touchGroundAnimation {
+    50% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+.touch-ground {
+    animation: touchGroundAnimation .6s;
+}
+
+
+
+
+
