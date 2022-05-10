@@ -79,9 +79,7 @@ const cleanUp = () => {
 const stop = () => {
     droppingAnimation.stop();
     addingAnimation.stop();
-    movingCloudAnimation.stop();
-
-    
+    movingCloudAnimation.stop();    
 }
 
 function reset() {    
@@ -130,7 +128,7 @@ const playAgainHandle = () => {
     reset();
     GameOverScreen.hide();
     
-    reRun();
+    run();
 }
 
 const playButtonStartScreenOnClick = () => {
@@ -144,7 +142,8 @@ const onType = (char) => {
         const boxName = b.getName();
         
         if(!b.hasClass("to-be-destroyed") && boxName == char){
-            SoundControl.playPoppingSound();
+            
+            SoundControl.poppingSound.play();
 
             LifeControl.addLife();
             LifePanel.updateLife(LifeControl.getLife());
@@ -272,6 +271,7 @@ function createControls() {
 function initControls() {
     LifeControl.init();
     LevelControl.init();
+    
 }
 
 
@@ -294,7 +294,7 @@ const touchGround = () => {
         const centerY = b.getCenter().y;
 
         if(!b.hasClass("touch-ground") && centerY >= window.innerHeight - GroundHeight){
-            SoundControl.playDroppingSound();
+            SoundControl.droppingSound.play();
             LifeControl.minusLife();
             LifePanel.updateLife(LifeControl.getLife());
 
@@ -374,6 +374,7 @@ function init() {
     addListeners();
 
     
+    SoundControl.introMusic.play();
 
 }
 
@@ -385,8 +386,10 @@ function run() {
     droppingAnimation.run();
     addingAnimation.run();
     movingCloudAnimation.run();
+    
+    SoundControl.introMusic.stop();
+    SoundControl.backgroundMusic.play();
 
-    SoundControl.playBackgroundMusic();
 }
 
 
@@ -395,7 +398,11 @@ function run() {
      * ****************/
 function gameOver()  {
     stop();
+    
     GameOverScreen.show();
+
+    SoundControl.backgroundMusic.stop();
+    SoundControl.introMusic.play();
 }
 
 

@@ -1,80 +1,56 @@
-import { createElement } from "./utils";
 import backgroundMusicFile from "./sounds/background.mp3";
+import introMusicFile from "./sounds/intro.mp3";
 import droppingSoundFile from "./sounds/dropping.ogg";
 import poppingSoundFile from "./sounds/popping.ogg";
+
+import { Howl } from "howler";
 
 export {
     createSoundControl
 }
 
 
-function createSound(audioContext, musicFile, volume) {
-    const gainNode = audioContext.createGain();
-    gainNode.gain.value = volume;
-        
-    const element = createElement("audio");
-    element.src = musicFile;
+function createSound(soundFile, autoplay, loop, volume) {
+    const sound = new Howl({
+        src: [soundFile],
+        autoplay: autoplay,
+        loop: loop,
+        volume: volume
+    });
 
-    const track = audioContext.createMediaElementSource(element);
-        
+    let playID = null;
+
+    const play = () => playID = sound.play();
+    const stop = () => sound.stop(playID);
+    const pause = () => sound.pause(playID);
+    const fade = (from, to) => sound.fade(from, to, playID);
+
     return {
-        gainNode,
-        element,
-        track
+        play,
+        pause,
+        stop,
+        fade
     }
 }
 
 function createSoundControl() {
-    
-    let audioContext = null,
-        background = null,
-        dropping = null,
-        popping = null;
-   
+    let backgroundMusic = createSound(backgroundMusicFile, false, true, .4),
+        introMusic = createSound(introMusicFile, false, true, .4),
+        droppingSound = createSound(droppingSoundFile, false, false, 1),
+        poppingSound = createSound(poppingSoundFile, false, false, 1);
 
-    const init = () => {
-        audioContext = new AudioContext();
 
-        background = createSound(audioContext, backgroundMusicFile, .2);
-        dropping = createSound(audioContext, droppingSoundFile, 3);
-        popping = createSound(audioContext, poppingSoundFile, 3);
-    }
-
-    const play = (sound, isLoop) => {
-        sound.track.connect(sound.gainNode).connect(audioContext.destination);
-    
-        sound.element.play();
-        sound.element.loop = isLoop; 
-    }
-    
-    /******Public Functions********************/
-    const playBackgroundMusic = () => play(background, true);
-
-    
-    
-    const playDroppingSound = () => {
-        const sound = createSound(audioContext, droppingSoundFile, 3);
-        play(sound, false);   
-    }
-
-    const playPoppingSound = () => {
-        const sound = createSound(audioContext, poppingSoundFile, 3);
-        play(sound, false);    
-
-    }
-    
-    
-    
-
-    /******Execution********************/
-    init();
 
     return {
-        playBackgroundMusic,
-        playDroppingSound,
-        playPoppingSound,
-        
+        backgroundMusic,
+        introMusic,
+        droppingSound,
+        poppingSound,
     }
 
 
 }
+
+
+
+
