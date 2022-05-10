@@ -67,7 +67,7 @@ let droppingSpaceInterval = null;
 
 
 /***************************************
- * Functions 
+ * Functionalities
  */
 
 const cleanUp = () => {
@@ -75,6 +75,14 @@ const cleanUp = () => {
     Boxes = []; 
 }
 
+function run() {
+    droppingAnimation.run();
+    addingAnimation.run();
+    movingCloudAnimation.run();
+    
+    
+
+}
     
 const stop = () => {
     droppingAnimation.stop();
@@ -83,16 +91,14 @@ const stop = () => {
 }
 
 function reset() {    
-    initControls();
     cleanUp();
+    initControls();
+    
 }
    
-function reRun() {
-    droppingAnimation.run();
-    addingAnimation.run();
-    movingCloudAnimation.run();
-}
-
+/***************************************
+ * Game Activities
+ */
 
 const removeBox = (box) => {
     const boxNode = box.getElement();
@@ -106,7 +112,35 @@ const removeBox = (box) => {
     
 }
 
+//addBox's helper
+const isTouch = (xCoord, yCoord, radius) => Boxes.reduce((result, currentB) => {
+                                        
+    if(result == true) return true;
+    
+    return currentB.isTouch(xCoord, yCoord, radius);
 
+}, false);
+
+
+const addBox = () => {
+    const Box = createBox(ALPHABET_ARR[randomNum(0, ALPHABET_ARR.length)]);
+    addElementToBody(Box.getElement());
+
+    //setPos
+    const yCoord = -Box.getRadius();
+    let xCoord = randomNum(Box.getRadius(), window.innerWidth - Box.getRadius());
+    
+    while(isTouch(xCoord, yCoord, Box.getRadius())){
+        
+        xCoord = randomNum(Box.getRadius(), window.innerWidth - Box.getRadius());
+    }
+    
+    
+    Box.setPos(xCoord, yCoord);
+    
+    //Add to Boxes
+    Boxes.push(Box);
+}
 
 //***************************************************** */
 // Event Listenners
@@ -125,14 +159,22 @@ const onLevelChange = (level) => {
 
 
 const playAgainHandle = () => {
-    reset();
     GameOverScreen.hide();
+    
+    reset();
+
+    SoundControl.introMusic.stop();
+    SoundControl.backgroundMusic.play();
     
     run();
 }
 
-const playButtonStartScreenOnClick = () => {
+const playHandle = () => {
     StartScreen.hide();
+
+    SoundControl.introMusic.stop();
+    SoundControl.backgroundMusic.play();
+
     run();
 }
 
@@ -227,7 +269,7 @@ function addComponents() {
 //***************************************************** */
 
 function createScreens() {
-    StartScreen = createStartScreen(playButtonStartScreenOnClick);
+    StartScreen = createStartScreen(playHandle);
     GameOverScreen = createGameOverScreen(playAgainHandle);
 }
 
@@ -310,36 +352,6 @@ const touchGround = () => {
 }
 
 
-//addBox and helper
-const isTouch = (xCoord, yCoord, radius) => Boxes.reduce((result, currentB) => {
-                                        
-    if(result == true) return true;
-    
-    return currentB.isTouch(xCoord, yCoord, radius);
-
-}, false);
-
-
-const addBox = () => {
-    const Box = createBox(ALPHABET_ARR[randomNum(0, ALPHABET_ARR.length)]);
-    addElementToBody(Box.getElement());
-
-    //setPos
-    const yCoord = -Box.getRadius();
-    let xCoord = randomNum(Box.getRadius(), window.innerWidth - Box.getRadius());
-    
-    while(isTouch(xCoord, yCoord, Box.getRadius())){
-        
-        xCoord = randomNum(Box.getRadius(), window.innerWidth - Box.getRadius());
-    }
-    
-    
-    Box.setPos(xCoord, yCoord);
-    
-    //Add to Boxes
-    Boxes.push(Box);
-}
-
 const createAnimations = () => {
     droppingAnimation = createAnimation(() => dropping(droppingSpaceInterval), touchGround);  
 
@@ -348,6 +360,7 @@ const createAnimations = () => {
     movingCloudAnimation = createAnimation(() => Clouds.move(MovingCloudSpaceInterval));
     movingCloudAnimation.setTimeInterval(MovingCloudTimeInterval);
 }
+
 
 
 //***************************************************** */
@@ -379,26 +392,12 @@ function init() {
 }
 
 
-    /******************
-     * RUN
-     * ****************/
-function run() {
-    droppingAnimation.run();
-    addingAnimation.run();
-    movingCloudAnimation.run();
-    
-    SoundControl.introMusic.stop();
-    SoundControl.backgroundMusic.play();
-
-}
-
 
     /******************
      * GAME OVER
      * ****************/
 function gameOver()  {
-    stop();
-    
+    stop();    
     GameOverScreen.show();
 
     SoundControl.backgroundMusic.stop();
