@@ -38,7 +38,7 @@ function createLevelNotification() {
     
     
 
-    const _popUp = () => {
+    const popUp = () => {
         addClassToElement("pop-up", PanelDiv);
 
         setTimeout(() => {
@@ -47,10 +47,6 @@ function createLevelNotification() {
     }
 
 
-    const popUp = (level, isEndGame) => {
-        setLevel(level, isEndGame);
-        _popUp();
-    }
 
 
     return {

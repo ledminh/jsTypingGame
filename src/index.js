@@ -94,8 +94,6 @@ function reset() {
     LevelPanel.setLevel(LevelControl.getLevel(), LevelControl.isEndGame());
     
 
-    // LevelNotif.reset();
-
 
     clearBox();
 
@@ -136,7 +134,8 @@ const onLevelChange = (level) => {
 
     LevelPanel.setLevel(level, LevelControl.isEndGame());
 
-    LevelNotif.popUp(level, LevelControl.isEndGame());
+    LevelNotif.setLevel(level, LevelControl.isEndGame());
+    LevelNotif.popUp();
 }
 
 
