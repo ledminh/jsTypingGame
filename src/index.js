@@ -82,19 +82,10 @@ const stop = () => {
     movingCloudAnimation.stop();
 }
 
-function reset() {
+function reset() {    
     LifeControl.init();
-    LifePanel.updateLife(LifeControl.getLife());
-
     LevelControl.init();
-    droppingAnimation.setTimeInterval(LevelControl.getDroppingTimeInterval());
-    addingAnimation.setTimeInterval(LevelControl.getAddingTimeInterval());
-    droppingSpaceInterval = LevelControl.getDroppingSpaceInterval();
-
-    LevelPanel.setLevel(LevelControl.getLevel(), LevelControl.isEndGame());
-    
-
-
+  
     clearBox();
 
 }
