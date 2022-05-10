@@ -70,7 +70,7 @@ let droppingSpaceInterval = null;
  * Functions 
  */
 
-const clearBox = () => {
+const cleanUp = () => {
     Boxes.forEach(b => b.getElement().parentNode? b.getElement().parentNode.removeChild(b.getElement()) : false);
     Boxes = []; 
 }
@@ -80,19 +80,19 @@ const stop = () => {
     droppingAnimation.stop();
     addingAnimation.stop();
     movingCloudAnimation.stop();
+
+    
 }
 
 function reset() {    
     initControls();
-  
-    clearBox();
-
+    cleanUp();
 }
    
 function reRun() {
-    droppingAnimation.reRun();
-    addingAnimation.reRun();
-    movingCloudAnimation.reRun();
+    droppingAnimation.run();
+    addingAnimation.run();
+    movingCloudAnimation.run();
 }
 
 

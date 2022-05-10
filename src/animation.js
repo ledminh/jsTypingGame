@@ -4,7 +4,7 @@ export {
 
 function createAnimation(...animates) {
     let runAgainAt = null; 
-    let stop = false;
+    let isStopped = null;
 
     let timeInterval = null;
     
@@ -15,7 +15,7 @@ function createAnimation(...animates) {
             runAgainAt += timeInterval;
         }
         
-        if(!stop){
+        if(!isStopped){
             requestAnimationFrame(_animate);
         }
     }
@@ -24,32 +24,21 @@ function createAnimation(...animates) {
     const setTimeInterval = (tI) => timeInterval = tI;
 
     const run =  () =>  {
+        isStopped = false;
         runAgainAt = Date.now();
-
+        
         requestAnimationFrame(_animate);
     
     };
 
-    const _stopFunc =  () => stop = true;
+    const stop =  () => isStopped = true;
 
-    const reRun = () => {
-        stop = false;
-        run();
-    }
     
     return {
-        stop: _stopFunc,
+        stop,
         run,
-        reRun,
         setTimeInterval
     }
 }
 
 
-function animate() {
-    if(Date.now() > runAgainAt) {
-        update();
-        render();
-    }
-
-}

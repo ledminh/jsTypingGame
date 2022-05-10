@@ -48,7 +48,9 @@ function createSoundControl() {
     }
     
     /******Public Functions********************/
-    const playBackgroundMusic = () => play(background, true)
+    const playBackgroundMusic = () => play(background, true);
+
+    
     
     const playDroppingSound = () => {
         const sound = createSound(audioContext, droppingSoundFile, 3);
@@ -70,7 +72,8 @@ function createSoundControl() {
     return {
         playBackgroundMusic,
         playDroppingSound,
-        playPoppingSound
+        playPoppingSound,
+        
     }
 
 
