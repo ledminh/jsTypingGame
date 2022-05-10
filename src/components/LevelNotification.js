@@ -21,10 +21,6 @@ function createLevelNotification() {
 
     const getElement = () => PanelDiv;
 
-    const reset = () => {
-        removeClassFromElement("end-game", PanelDiv);
-        Label.innerText = "LEVEL ";
-    }
 
     const setLevel = (level, endGame) => {
         if(endGame){
@@ -33,6 +29,8 @@ function createLevelNotification() {
             Level.innerText = "END GAME";
         }
         else {
+            removeClassFromElement("end-game", PanelDiv);
+            Label.innerText = "LEVEL ";
             Level.innerText = level;
             
         }
@@ -58,7 +56,6 @@ function createLevelNotification() {
     return {
         getElement,
         popUp,
-        setLevel,
-        reset
+        setLevel
     }
 }

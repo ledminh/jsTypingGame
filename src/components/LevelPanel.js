@@ -21,10 +21,7 @@ function createLevelPanel() {
 
     const getElement = () => PanelDiv;
     
-    const reset = () => {
-        removeClassFromElement("end-game", PanelDiv);
-        Label.innerText = "LEVEL ";
-    }
+
 
     const setLevel = (level, endGame) => {
         if(endGame){
@@ -33,13 +30,14 @@ function createLevelPanel() {
             Level.innerText = "END GAME";
         }
         else {
+            removeClassFromElement("end-game", PanelDiv);
+            Label.innerText = "LEVEL ";
             Level.innerText = level;
         }
     }
 
     return {
         getElement,
-        setLevel,
-        reset
+        setLevel
     }
 }

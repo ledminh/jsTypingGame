@@ -18,7 +18,7 @@ function createLifeControl(afterInit) {
         afterInit(life);
     }
 
-    const reset = () => init();
+   
 
     /********************************/
     
@@ -29,6 +29,6 @@ function createLifeControl(afterInit) {
         addLife,
         minusLife,
         isGameOver,
-        reset
+        init
     }
 }

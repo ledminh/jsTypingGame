@@ -70,91 +70,43 @@ let droppingSpaceInterval = null;
  * Functions 
  */
 
-    // *************************
-    // Helpers
-
-const isTouch = (xCoord, yCoord, radius) => Boxes.reduce((result, currentB) => {
-                                        
-                                        if(result == true) return true;
-                                        
-                                        return currentB.isTouch(xCoord, yCoord, radius);
-
-                                    }, false);
-
-
-
-
-const addBox = () => {
-    const Box = createBox(ALPHABET_ARR[randomNum(0, ALPHABET_ARR.length)]);
-    addElementToBody(Box.getElement());
-
-    //setPos
-    const yCoord = -Box.getRadius();
-    let xCoord = randomNum(Box.getRadius(), window.innerWidth - Box.getRadius());
-    
-    while(isTouch(xCoord, yCoord, Box.getRadius())){
-        
-        xCoord = randomNum(Box.getRadius(), window.innerWidth - Box.getRadius());
-    }
-    
-    
-    Box.setPos(xCoord, yCoord);
-    
-    //Add to Boxes
-    Boxes.push(Box);
-}
-
 const clearBox = () => {
     Boxes.forEach(b => b.getElement().parentNode? b.getElement().parentNode.removeChild(b.getElement()) : false);
-    
     Boxes = []; 
 }
 
     
-    const stop = () => {
-        droppingAnimation.stop();
-        addingAnimation.stop();
-        movingCloudAnimation.stop();
-    }
+const stop = () => {
+    droppingAnimation.stop();
+    addingAnimation.stop();
+    movingCloudAnimation.stop();
+}
 
-    function reset() {
-        LifeControl.reset();
-        LifePanel.updateLife(LifeControl.getLife());
+function reset() {
+    LifeControl.init();
+    LifePanel.updateLife(LifeControl.getLife());
 
-        LevelControl.reset();
-        droppingAnimation.setTimeInterval(LevelControl.getDroppingTimeInterval());
-        addingAnimation.setTimeInterval(LevelControl.getAddingTimeInterval());
-        droppingSpaceInterval = LevelControl.getDroppingSpaceInterval();
+    LevelControl.init();
+    droppingAnimation.setTimeInterval(LevelControl.getDroppingTimeInterval());
+    addingAnimation.setTimeInterval(LevelControl.getAddingTimeInterval());
+    droppingSpaceInterval = LevelControl.getDroppingSpaceInterval();
 
-        LevelPanel.reset();
-        LevelPanel.setLevel(LevelControl.getLevel(), LevelControl.isEndGame());
-        
+    LevelPanel.setLevel(LevelControl.getLevel(), LevelControl.isEndGame());
+    
 
-        LevelNotif.reset();
+    // LevelNotif.reset();
 
 
-        clearBox();
-
-    }
-   
-    function reRun() {
-        droppingAnimation.reRun();
-        addingAnimation.reRun();
-        movingCloudAnimation.reRun();
-    }
-
-    // *************************
-    // Will Be Executed
-
-const dropping = () => {
-    Boxes.forEach(b => {
-        const center = b.getCenter();
-        const nextY = center.y + droppingSpaceInterval*b.getSpeedParam();
-
-        b.setPos(center.x, nextY);
-    });
+    clearBox();
 
 }
+   
+function reRun() {
+    droppingAnimation.reRun();
+    addingAnimation.reRun();
+    movingCloudAnimation.reRun();
+}
+
 
 const removeBox = (box) => {
     const boxNode = box.getElement();
@@ -171,27 +123,9 @@ const removeBox = (box) => {
 
 
 //***************************************************** */
-// Event Listenner
+// Event Listenners
 //***************************************************** */
-const touchGround = () => {
-    Boxes.forEach(b => {
-        const centerY = b.getCenter().y;
 
-        if(!b.hasClass("touch-ground") && centerY >= window.innerHeight - GroundHeight){
-            SoundControl.playDroppingSound();
-            LifeControl.minusLife();
-            LifePanel.updateLife(LifeControl.getLife());
-
-            b.setClass("touch-ground");
-            setTimeout(() => removeBox(b), TouchGroundEffectDuration + 10);
-
-            if(LifeControl.isGameOver()) {
-                gameOver();
-            }
-        }
-
-    })
-}
 
 
 
@@ -205,6 +139,7 @@ const onLevelChange = (level) => {
     LevelNotif.popUp(level, LevelControl.isEndGame());
 }
 
+
 const playAgainHandle = () => {
     reset();
     GameOverScreen.hide();
@@ -217,11 +152,33 @@ const playButtonStartScreenOnClick = () => {
     run();
 }
 
-//***************************************************** */
-// Init
-//***************************************************** */
 
-    //Components
+const onType = (char) => {
+    Boxes.forEach(b => {
+        const boxName = b.getName();
+        
+        if(!b.hasClass("to-be-destroyed") && boxName == char){
+            SoundControl.playPoppingSound();
+
+            LifeControl.addLife();
+            LifePanel.updateLife(LifeControl.getLife());
+
+            LevelControl.setLevel(LifeControl.getLife());
+
+            b.setClass("to-be-destroyed");
+            setTimeout(() => removeBox(b), DestroyedEffectDuration);
+        }
+    })
+}
+
+const addListeners = () => {
+    onCharacter(document.body, (char) => onType(char.toUpperCase()));
+}
+
+
+//***************************************************** */
+// Components
+//***************************************************** */
 
 const createSun = () =>{
     const sun = createElement("img", "sun");
@@ -280,7 +237,9 @@ function addComponents() {
 
 
 
-    //Screens
+//***************************************************** */
+// Screens
+//***************************************************** */
 
 function createScreens() {
     StartScreen = createStartScreen(playButtonStartScreenOnClick);
@@ -293,8 +252,10 @@ function addScreens() {
 }
 
 
+//***************************************************** */
+// Controls
+//***************************************************** */
 
-    // Control Unit
 const afterInitLifeControl = (life) => {
 
     LifePanel.updateLife(life);  
@@ -313,6 +274,7 @@ const afterInitLevelControl = (level, droppingSpaceItv, droppingTimeItv, addingT
     addingAnimation.setTimeInterval(addingTimeItv);
 }
     
+
 function createControls() {
     LevelControl = createLevelControl(afterInitLevelControl, onLevelChange);
     LifeControl = createLifeControl(afterInitLifeControl);  
@@ -323,7 +285,70 @@ function createControls() {
 
 
 
-    //Animations
+//***************************************************** */
+// Animations
+//***************************************************** */
+const dropping = () => {
+    Boxes.forEach(b => {
+        const center = b.getCenter();
+        const nextY = center.y + droppingSpaceInterval*b.getSpeedParam();
+
+        b.setPos(center.x, nextY);
+    });
+
+}
+
+const touchGround = () => {
+    Boxes.forEach(b => {
+        const centerY = b.getCenter().y;
+
+        if(!b.hasClass("touch-ground") && centerY >= window.innerHeight - GroundHeight){
+            SoundControl.playDroppingSound();
+            LifeControl.minusLife();
+            LifePanel.updateLife(LifeControl.getLife());
+
+            b.setClass("touch-ground");
+            setTimeout(() => removeBox(b), TouchGroundEffectDuration + 10);
+
+            if(LifeControl.isGameOver()) {
+                gameOver();
+            }
+        }
+
+    })
+}
+
+
+//addBox and helper
+const isTouch = (xCoord, yCoord, radius) => Boxes.reduce((result, currentB) => {
+                                        
+    if(result == true) return true;
+    
+    return currentB.isTouch(xCoord, yCoord, radius);
+
+}, false);
+
+
+const addBox = () => {
+    const Box = createBox(ALPHABET_ARR[randomNum(0, ALPHABET_ARR.length)]);
+    addElementToBody(Box.getElement());
+
+    //setPos
+    const yCoord = -Box.getRadius();
+    let xCoord = randomNum(Box.getRadius(), window.innerWidth - Box.getRadius());
+    
+    while(isTouch(xCoord, yCoord, Box.getRadius())){
+        
+        xCoord = randomNum(Box.getRadius(), window.innerWidth - Box.getRadius());
+    }
+    
+    
+    Box.setPos(xCoord, yCoord);
+    
+    //Add to Boxes
+    Boxes.push(Box);
+}
+
 const createAnimations = () => {
     droppingAnimation = createAnimation(() => dropping(droppingSpaceInterval), touchGround);  
 
@@ -331,31 +356,6 @@ const createAnimations = () => {
     
     movingCloudAnimation = createAnimation(() => Clouds.move(MovingCloudSpaceInterval));
     movingCloudAnimation.setTimeInterval(MovingCloudTimeInterval);
-}
-
-//***************************************************** */
-// Listeners
-//***************************************************** */
-const onType = (char) => {
-    Boxes.forEach(b => {
-        const boxName = b.getName();
-        
-        if(!b.hasClass("to-be-destroyed") && boxName == char){
-            SoundControl.playPoppingSound();
-
-            LifeControl.addLife();
-            LifePanel.updateLife(LifeControl.getLife());
-
-            LevelControl.setLevel(LifeControl.getLife());
-
-            b.setClass("to-be-destroyed");
-            setTimeout(() => removeBox(b), DestroyedEffectDuration);
-        }
-    })
-}
-
-const addListeners = () => {
-    onCharacter(document.body, (char) => onType(char.toUpperCase()));
 }
 
 
@@ -405,11 +405,6 @@ function gameOver()  {
     stop();
     GameOverScreen.show();
 }
-
-
-
-
-
 
 
 

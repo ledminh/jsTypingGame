@@ -92,9 +92,15 @@ const Level = [
         addingTimeInterval:1700
     },
 
-
     {
         life: 4,
+        droppingSpaceInterval: 5,
+        droppingTimeInterval: 4,
+        addingTimeInterval: 500
+    },
+
+    {
+        life: 6,
         droppingSpaceInterval: 5,
         droppingTimeInterval: 4,
         addingTimeInterval: 500
