@@ -78,8 +78,9 @@ function createGameOverScreen(playAgainHandle, quitHandle) {
     quitButton.addEventListener("click", quitHandle);
 
 
-    const getElement = () => GameOverScreen;
 
+    
+    const getElement = () => GameOverScreen;
     const show = () => removeClassFromElement("hidden", GameOverScreen);
     const hide = () => addClassToElement("hidden", GameOverScreen);
 

@@ -1,14 +1,16 @@
-import { addClassToElement, addElementTo, createElement } from "../utils";
+import {addElementTo, createElement } from "../utils";
+import { createScreen } from "../screens/createScreen";
+
+
+
 
 export {
     createStartScreen
 }
 
-function createStartScreen(playOnClick) {
-    const startScreenDiv = createElement("div", "start-screen");
-
+function createStartScreenContent(playOnClick) {
     const contentWrapper = createElement("div", "content-wrapper");
-    addElementTo(contentWrapper, startScreenDiv);
+    
 
     const title = createElement("h1", "title", "TYPING FAST");
     addElementTo(title, contentWrapper);
@@ -28,12 +30,26 @@ function createStartScreen(playOnClick) {
 
     playButton.addEventListener("click", playOnClick);
 
-    const getElement = () => startScreenDiv;
+    return contentWrapper;
+}
+
+
+
+
+function createStartScreen(playOnClick) {
+    const screen = createScreen("start-screen");
+    const contentWrapper = createStartScreenContent(playOnClick);
     
-    const hide = () => addClassToElement("hidden", startScreenDiv);
+    screen.addContent(contentWrapper);
+
+
+    const show = screen.show;
+    const hide = screen.hide;
+    const hook = screen.hook;
     
     return {
-        getElement,
-        hide
+        show,
+        hide,
+        hook
     }
 }

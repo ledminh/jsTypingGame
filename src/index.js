@@ -270,11 +270,14 @@ function addComponents() {
 
 function createScreens() {
     StartScreen = createStartScreen(playHandle);
+    
+
     GameOverScreen = createGameOverScreen(playAgainHandle);
 }
 
 function addScreens() {
-    addElementToBody(StartScreen.getElement());
+    StartScreen.hook(document.body);
+
     addElementToBody(GameOverScreen.getElement());
 }
 

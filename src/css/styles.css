@@ -26,6 +26,10 @@ body {
 
 }
 
+
+
+
+
 .sun {
     position: absolute;
     top: 0;
@@ -54,20 +58,9 @@ body {
     
 }
 
-.start-screen {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    z-index: 10000;
-}
-
+/************************
+* START SCREEN
+*/
 .start-screen .content-wrapper {
     width: 80%;
     max-width: 1200px;
@@ -136,6 +129,10 @@ body {
     background-color: rgb(125, 185, 165);
 }
 
+
+/************************
+* GAME OVER SCREEN
+*/
 .game-over-screen {
     position: absolute;
     top: 0;
@@ -149,9 +146,13 @@ body {
 
     background-color: rgba(0,0,0,.92);
 
-    z-index: 10000000000000;
+    z-index: 10000;
 
 
+}
+
+.hidden {
+    display: none;
 }
 
 .game-over-screen .credit-screen {
@@ -201,10 +202,6 @@ body {
 }
 
 
-.hidden {
-    
-    display: none;
-}
 
 .game-over-screen .content-wrapper {
     display: flex;
