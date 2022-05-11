@@ -1,4 +1,4 @@
-import  { create, random } from "lodash";
+import  {  random } from "lodash";
 
 import "./css/styles.css";
 
@@ -10,16 +10,15 @@ import {createBox} from './Box';
 import { DestroyedEffectDuration, GroundHeight, TouchGroundEffectDuration, MovingCloudSpaceInterval, MovingCloudTimeInterval } from "./config";
 
 
+import { getScreens } from "./screens";
+
+
 import { createLevelPanel } from "./components/LevelPanel";
 import { createLifePanel } from "./components/LifePanel";
 import { createLevelNotification } from "./components/LevelNotification";
 
 
 import {createLevelControl} from './LevelControl';
-import { createGameOverScreen } from "./components/GameOverScreen";
-
-import { createStartScreen } from "./components/StartScreen";
-
 import { createLifeControl } from "./LifeControl";
 
 import groundImg from './imgs/ground.png';
@@ -35,8 +34,7 @@ let Boxes = [];
 
 
 //Screens
-let GameOverScreen = null;
-let StartScreen = null;
+let Screens = null;
 
 
 //Components
@@ -159,7 +157,7 @@ const onLevelChange = (level) => {
 
 
 const playAgainHandle = () => {
-    GameOverScreen.hide();
+    Screens.gameOverScreen.hide();
     
     reset();
 
@@ -170,12 +168,17 @@ const playAgainHandle = () => {
 }
 
 const playHandle = () => {
-    StartScreen.hide();
+    Screens.startScreen.hide();
 
     SoundControl.introMusic.stop();
     SoundControl.backgroundMusic.play();
 
     run();
+}
+
+const quitHandle = () => {
+    Screens.gameOverScreen.hide();
+    Screens.creditScreen.show();
 }
 
 
@@ -269,18 +272,28 @@ function addComponents() {
 //***************************************************** */
 
 function createScreens() {
-    StartScreen = createStartScreen(playHandle);
-    
+    const startScreenHandles = {playHandle};
+    const gameOverScreenHandles = {playAgainHandle, quitHandle};
+    const creditScreenHandles = {};
 
-    GameOverScreen = createGameOverScreen(playAgainHandle);
+
+    Screens = getScreens(startScreenHandles, gameOverScreenHandles, creditScreenHandles);
 }
 
 function addScreens() {
-    StartScreen.hook(document.body);
+    const body = document.body;
 
-    addElementToBody(GameOverScreen.getElement());
+    Screens.startScreen.hook(body);
+    Screens.gameOverScreen.hook(body);
+    Screens.creditScreen.hook(body);
 }
 
+
+function hideScreens() {
+    Screens.startScreen.hide();
+    Screens.gameOverScreen.hide();
+    Screens.creditScreen.hide();
+}
 
 //***************************************************** */
 // Controls
@@ -385,6 +398,9 @@ function init() {
 
     createScreens();
     addScreens();
+    hideScreens();
+
+    Screens.startScreen.show();
 
 
     addListeners();
@@ -401,7 +417,7 @@ function init() {
      * ****************/
 function gameOver()  {
     stop();    
-    GameOverScreen.show();
+    Screens.gameOverScreen.show();
 
     SoundControl.backgroundMusic.stop();
     SoundControl.introMusic.play();

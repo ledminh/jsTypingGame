@@ -1,14 +1,17 @@
-import {addElementTo, createElement } from "../utils";
-import { createScreen } from "../screens/createScreen";
+import "./style.css";
 
-
+import {addElementTo, createElement } from "../../utils";
 
 
 export {
-    createStartScreen
-}
+    createStartScreenContent,
+    START_SCREEN_CLASS
+};
 
-function createStartScreenContent(playOnClick) {
+const START_SCREEN_CLASS = "start-screen";
+
+
+function createStartScreenContent({playHandle}) {
     const contentWrapper = createElement("div", "content-wrapper");
     
 
@@ -28,7 +31,7 @@ function createStartScreenContent(playOnClick) {
     const playButton = createElement("button", "play", "PLAY");
     addElementTo(playButton, contentWrapper);
 
-    playButton.addEventListener("click", playOnClick);
+    playButton.addEventListener("click", playHandle);
 
     return contentWrapper;
 }
@@ -36,20 +39,7 @@ function createStartScreenContent(playOnClick) {
 
 
 
-function createStartScreen(playOnClick) {
-    const screen = createScreen("start-screen");
-    const contentWrapper = createStartScreenContent(playOnClick);
-    
-    screen.addContent(contentWrapper);
 
 
-    const show = screen.show;
-    const hide = screen.hide;
-    const hook = screen.hook;
-    
-    return {
-        show,
-        hide,
-        hook
-    }
-}
+
+

@@ -4,7 +4,7 @@ export {
     createScreen
 }
 
-function createScreen(className) {
+function createScreen(className, content, backgroundColor) {
     const screen = createElement("div", className);
 
     screen.style.cssText = `
@@ -21,7 +21,13 @@ function createScreen(className) {
         z-index: 10000;
     `
 
-    const addContent = (content) => addElementTo(content, screen);
+    if(backgroundColor){
+        screen.style.backgroundColor = backgroundColor;
+    }
+
+    addElementTo(content, screen);
+
+
     const show = () => screen.style.display = "flex";
     const hide = () => screen.style.display = "none";
     
@@ -30,7 +36,6 @@ function createScreen(className) {
 
     return {
         hook,
-        addContent,
         show,
         hide
     };

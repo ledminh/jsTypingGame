@@ -1,0 +1,71 @@
+.game-over-screen .content-wrapper {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+
+
+
+}
+
+.game-over-screen .text {
+    font-size: 4.5rem;
+    font-family: cursive;
+    font-weight: bold;
+    
+    text-align: center;
+    color: rgb(216, 10, 10);
+
+    margin-bottom: 2rem;
+
+}
+
+.game-over-screen .buttons {
+    width: 100%;
+    text-align: center;
+}
+
+.game-over-screen button {
+    padding: 1rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    font-family: cursive;
+
+    border: none;
+
+    border-radius: 20px;
+
+}
+
+.game-over-screen button.play-again {
+    margin-right: 2rem;
+
+    background-color: rgb(68, 124, 85);
+    color: aliceblue;
+}
+
+.game-over-screen button.play-again:hover {
+    background-color: rgb(97, 170, 119);
+    
+}
+
+
+.game-over-screen button.play-again:active {
+    background-color: rgb(85, 145, 103);
+    
+}
+
+.game-over-screen button.quit {
+    background-color: rgb(110, 38, 38);
+    color: aliceblue;
+}
+
+.game-over-screen button.quit:hover {
+    background-color: rgb(153, 51, 51);
+    
+}
+
+.game-over-screen button.quit:active {
+    background-color: rgb(117, 37, 37);
+    
+}

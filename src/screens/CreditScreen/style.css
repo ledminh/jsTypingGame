@@ -1,0 +1,45 @@
+.credit-screen .content-wrapper {
+    border: 2px solid white;
+    border-radius: 20px;
+    padding: 2rem;
+    color: rgb(209, 184, 184);
+    font-size: 1.2rem;
+
+    text-align: center;
+}
+
+.credit-screen .content-wrapper h2 {
+    color: rgb(209, 209, 209);
+    font-size: 3rem;
+    font-family: cursive;
+
+    margin-bottom: 2rem;
+}
+
+.credit-screen .content-wrapper h3 {
+    color: rgb(221, 118, 118);
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.credit-screen .content-wrapper ul {
+    list-style-type: none;
+}
+
+.credit-screen .content-wrapper li {
+    margin-top: .5rem;
+}
+
+.credit-screen .content-wrapper a {
+    color:rgb(39, 133, 133);
+    
+}
+
+.credit-screen .content-wrapper a:visited {
+    color:rgb(53, 167, 167);
+}
+
+.credit-screen .content-wrapper .other-credits {
+    margin-bottom: 1rem;
+    font-style: italic;
+}
