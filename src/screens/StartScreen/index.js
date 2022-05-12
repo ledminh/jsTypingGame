@@ -1,9 +1,11 @@
 import "./style.css";
 
 import createWrapper from "../createWrapper";
+import assemble from "../assemble";
+
 import assembleSteps from "./assembleSteps";
 import getWrapperStyle from "./wrapperStyle";
-import { addElementTo } from "../../utils";
+
 
 export {
     createStartScreenContent,
@@ -12,13 +14,7 @@ export {
 
 const START_SCREEN_CLASS = "start-screen";
 
-const assemble = (wrapper, func, handles) => {
-    const elem = func(handles);
 
-    addElementTo(elem, wrapper);
-
-    return wrapper;
-}
 
 
 const createStartScreenContent = (handles) => Object.keys(assembleSteps)
