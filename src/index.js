@@ -129,6 +129,7 @@ const addBox = () => {
 
     //setPos
     const yCoord = -Box.getRadius();
+
     let xCoord = randomNum(Box.getRadius(), window.innerWidth - Box.getRadius());
     
     while(isTouch(xCoord, yCoord, Box.getRadius())){
@@ -187,7 +188,7 @@ const quitHandle = () => {
 
 const onType = (char) => {
     if(isStopped) return;
-    
+
     Boxes.forEach(b => {
         const boxName = b.getName();
         

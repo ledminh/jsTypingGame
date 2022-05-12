@@ -22,88 +22,88 @@ const LevelNotifPopUpTime = 600;
 
 
 
-// const Level = [
-//     {
-//         life: 10,
-//         droppingSpaceInterval: 2,
-//         droppingTimeInterval: 10,
-//         addingTimeInterval:1700
-//     },
-
-//     {
-//         life: 20,
-//         droppingSpaceInterval: 2,
-//         droppingTimeInterval: 5,
-//         addingTimeInterval:1500
-//     },
-
-//     {
-//         life: 80,
-//         droppingSpaceInterval: 3,
-//         droppingTimeInterval: 5,
-//         addingTimeInterval: 1400
-//     },
-
-//     {
-//         life: 150,
-//         droppingSpaceInterval: 4,
-//         droppingTimeInterval: 5,
-//         addingTimeInterval: 1200
-//     },
-
-//     {
-//         life: 250,
-//         droppingSpaceInterval: 4,
-//         droppingTimeInterval: 4,
-//         addingTimeInterval: 1000
-//     },
-
-//     {
-//         life: 370,
-//         droppingSpaceInterval: 5,
-//         droppingTimeInterval: 4,
-//         addingTimeInterval: 900
-//     },
-
-//     {
-//         life: 510,
-//         droppingSpaceInterval: 5,
-//         droppingTimeInterval: 4,
-//         addingTimeInterval: 600
-//     },
-
-//     {
-//         life: 650,
-//         droppingSpaceInterval: 5,
-//         droppingTimeInterval: 4,
-//         addingTimeInterval: 500
-//     }
-// ]
-
-
-
 const Level = [
     {
-        life:2,
+        life: 10,
         droppingSpaceInterval: 2,
         droppingTimeInterval: 10,
         addingTimeInterval:1700
     },
 
     {
-        life: 4,
+        life: 20,
         droppingSpaceInterval: 2,
         droppingTimeInterval: 5,
-        addingTimeInterval:1000
+        addingTimeInterval:1500
     },
 
-   
     {
-        life: 6,
+        life: 80,
+        droppingSpaceInterval: 3,
+        droppingTimeInterval: 5,
+        addingTimeInterval: 1400
+    },
+
+    {
+        life: 150,
+        droppingSpaceInterval: 4,
+        droppingTimeInterval: 5,
+        addingTimeInterval: 1200
+    },
+
+    {
+        life: 250,
+        droppingSpaceInterval: 4,
+        droppingTimeInterval: 4,
+        addingTimeInterval: 1000
+    },
+
+    {
+        life: 370,
+        droppingSpaceInterval: 5,
+        droppingTimeInterval: 4,
+        addingTimeInterval: 900
+    },
+
+    {
+        life: 510,
+        droppingSpaceInterval: 5,
+        droppingTimeInterval: 4,
+        addingTimeInterval: 600
+    },
+
+    {
+        life: 650,
         droppingSpaceInterval: 5,
         droppingTimeInterval: 4,
         addingTimeInterval: 500
     }
 ]
+
+
+
+// const Level = [
+//     {
+//         life:2,
+//         droppingSpaceInterval: 2,
+//         droppingTimeInterval: 10,
+//         addingTimeInterval:1700
+//     },
+
+//     {
+//         life: 4,
+//         droppingSpaceInterval: 2,
+//         droppingTimeInterval: 5,
+//         addingTimeInterval:1000
+//     },
+
+   
+//     {
+//         life: 6,
+//         droppingSpaceInterval: 5,
+//         droppingTimeInterval: 4,
+//         addingTimeInterval: 500
+//     }
+// ]
 
 const getLifeInitialValue = () => Level[0].life;

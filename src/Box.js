@@ -14,13 +14,14 @@ function createBox(boxName) {
     const Box = createElement('div', "box", boxName);
     addElementTo(Box, Wrapper);
 
+
     Wrapper.style.zIndex = random(1,3);
 
 
     const speedParam = random(.8, 1.1);
 
     //Private functions
-    const getRadius = () => Wrapper.getBoundingClientRect().width/2;
+    const getRadius = () => Box.getBoundingClientRect().width/2;;
     const getLeft = () => Wrapper.getBoundingClientRect().left;
     const getTop = () =>  Wrapper.getBoundingClientRect().top;
 
