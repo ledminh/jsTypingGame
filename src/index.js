@@ -31,7 +31,7 @@ import sunIMG from './imgs/sun.png';
 
 
 let Boxes = [];
-
+let isStopped = true;
 
 
 //Screens
@@ -80,13 +80,15 @@ function run() {
     movingCloudAnimation.run();
     
     
-
+    isStopped = false;
 }
     
 const stop = () => {
     droppingAnimation.stop();
     addingAnimation.stop();
     movingCloudAnimation.stop();    
+
+    isStopped = true;
 }
 
 function reset() {    
@@ -184,6 +186,8 @@ const quitHandle = () => {
 
 
 const onType = (char) => {
+    if(isStopped) return;
+    
     Boxes.forEach(b => {
         const boxName = b.getName();
         
