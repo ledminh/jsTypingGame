@@ -1,36 +1,24 @@
 import {addElementTo, createElement } from "../../utils";
 
 const assembleSteps = {
-    createThankyouNote: (wrapper) => {
-        const thankyouNote = createElement("h2", "thank-you", "THANK YOU FOR PLAYING");
-        addElementTo(thankyouNote, wrapper);
+    createThankyouNote: () => createElement("h2", "thank-you", "THANK YOU FOR PLAYING"),
 
-        return wrapper;
-    },
+    createAuthorLine: () => createElement("h3", "author", "This game is created by Minh Le"),
 
-    createAuthorLine: (wrapper) => {
-        const authorLine = createElement("h3", "author", "This game is created by Minh Le");
-        addElementTo(authorLine, wrapper);
-
-        return wrapper;
-
-    },
-
-    createCreditLine: (wrapper) => {
+    createCreditLine: () => {
         const creditLine = createElement("div", "other-credits");
 
         creditLine.innerHTML = `<p>Music: 
                             <p>Uppbeat (https://uppbeat.io/t/hartzmann/sunny) - License code: 9OWFUTHDBK9DYJSQ</p>    
                             <p>and www.bensound.com</p>`
 
-        addElementTo(creditLine, wrapper);
 
-        return wrapper;
+        return creditLine;
     },
 
-    createContactList: (wrapper) => {
+    createContactList: () => {
         const contactList = createElement("div", "contact-list");
-        addElementTo(contactList, wrapper);
+        
 
         contactList.innerHTML = `You can find me at:
                                 <ul>
@@ -40,7 +28,7 @@ const assembleSteps = {
                                     <li><a href="https://www.ledminh.dev/">LEDMINH.DEV</a></li>
                                 </ul>`
 
-        return wrapper;
+        return contactList;
     }
 
 

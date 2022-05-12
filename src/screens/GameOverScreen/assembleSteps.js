@@ -1,14 +1,9 @@
 import {addElementTo, createElement } from "../../utils";
 
 const assembleSteps = {
-    createTextDiv: (wrapper) => {
-        const textDiv = createElement("div", "text", "GAME OVER");
-        addElementTo(textDiv, wrapper);
-
-        return wrapper;
-    },
+    createTextDiv: () => createElement("div", "text", "GAME OVER"),
     
-    createButtonsDiv: (wrapper, {playAgainHandle, quitHandle}) => {
+    createButtonsDiv: ({playAgainHandle, quitHandle}) => {
         const buttonsDiv = createElement("div", "buttons");
         
         const playAgainButton = createElement("button", "play-again", "PLAY AGAIN?");
@@ -20,9 +15,8 @@ const assembleSteps = {
         quitButton.addEventListener("click", quitHandle);
 
         
-        addElementTo(buttonsDiv, wrapper);
 
-        return wrapper;
+        return buttonsDiv;
     } 
 
 

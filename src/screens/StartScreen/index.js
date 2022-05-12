@@ -1,10 +1,10 @@
 import "./style.css";
 
 import createWrapper from "../createWrapper";
-import assemble from "../assemble";
 
 import assembleSteps from "./assembleSteps";
 import getWrapperStyle from "./wrapperStyle";
+import createScreenContent from "../createScreenContent";
 
 
 export {
@@ -15,14 +15,9 @@ export {
 const START_SCREEN_CLASS = "start-screen";
 
 
+const wrapper = createWrapper(getWrapperStyle());
 
-
-const createStartScreenContent = (handles) => Object.keys(assembleSteps)
-                                                        .reduce(
-                                                            (wrapper, func) => assemble(wrapper, assembleSteps[func], handles), 
-                                                            createWrapper(getWrapperStyle())
-                                                        );
-
+const createStartScreenContent = (handles) => createScreenContent(wrapper, assembleSteps, handles);
 
 
 
