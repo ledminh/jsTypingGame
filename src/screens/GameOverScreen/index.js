@@ -11,6 +11,7 @@ export {
 
 const GAME_OVER_SCREEN_CLASS = "game-over-screen";
 
+
 const createGameOverScreenContent = (handles) => Object.keys(assembleSteps)
                                                         .reduce(
                                                             (wrapper, func) => assembleSteps[func](wrapper, handles), 
