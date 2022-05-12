@@ -1,13 +1,3 @@
-.game-over-screen .content-wrapper {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: center;
-    align-items: center;
-
-
-
-}
-
 .game-over-screen .text {
     font-size: 4.5rem;
     font-family: cursive;
