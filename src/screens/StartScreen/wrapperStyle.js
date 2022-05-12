@@ -1,5 +1,3 @@
-
-
 const getWrapperStyle = () => `
     width: 80%;
     max-width: 1200px;
