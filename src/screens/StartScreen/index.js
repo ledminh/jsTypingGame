@@ -2,7 +2,7 @@ import "./style.css";
 
 import createWrapper from "../createWrapper";
 
-import assembleSteps from "./assembleSteps";
+import assembleParts from "./assembleParts";
 import getWrapperStyle from "./wrapperStyle";
 import createScreenContent from "../createScreenContent";
 
@@ -17,7 +17,7 @@ const START_SCREEN_CLASS = "start-screen";
 
 const wrapper = createWrapper(getWrapperStyle());
 
-const createStartScreenContent = (handles) => createScreenContent(wrapper, assembleSteps, handles);
+const createStartScreenContent = (handles) => createScreenContent(wrapper, assembleParts, handles);
 
 
 

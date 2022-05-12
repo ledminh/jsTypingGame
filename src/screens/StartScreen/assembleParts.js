@@ -1,6 +1,6 @@
 import {createElement } from "../../utils";
 
-const assembleSteps = {
+const assembleParts = {
     addTitle:  () => createElement("h1", "title", "TYPING FAST"),
 
     addSubtitle: () => createElement("h4", "subtitle", "LET'S SEE HOW FAST YOU CAN TYPE"),
@@ -26,4 +26,4 @@ const assembleSteps = {
 }
 
 
-export default assembleSteps;
+export default assembleParts;

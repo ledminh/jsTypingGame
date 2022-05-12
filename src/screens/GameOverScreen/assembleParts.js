@@ -1,6 +1,6 @@
 import {addElementTo, createElement } from "../../utils";
 
-const assembleSteps = {
+const assembleParts = {
     createTextDiv: () => createElement("div", "text", "GAME OVER"),
     
     createButtonsDiv: ({playAgainHandle, quitHandle}) => {
@@ -22,4 +22,4 @@ const assembleSteps = {
 
 }
 
-export default assembleSteps;
+export default assembleParts;

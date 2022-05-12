@@ -1,7 +1,7 @@
 import "./style.css";
 
 import createWrapper from "../createWrapper";
-import assembleSteps from "./assembleSteps";
+import assembleParts from "./assembleParts";
 import getWrapperStyle from "./wrapperStyle";
 import createScreenContent from "../createScreenContent";
 
@@ -15,7 +15,7 @@ const GAME_OVER_SCREEN_CLASS = "game-over-screen";
 
 const wrapper = createWrapper(getWrapperStyle());
 
-const createGameOverScreenContent = (handles) => createScreenContent(wrapper, assembleSteps, handles);
+const createGameOverScreenContent = (handles) => createScreenContent(wrapper, assembleParts, handles);
 
 
 

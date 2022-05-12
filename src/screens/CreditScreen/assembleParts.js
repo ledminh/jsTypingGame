@@ -1,6 +1,6 @@
-import {addElementTo, createElement } from "../../utils";
+import {createElement } from "../../utils";
 
-const assembleSteps = {
+const assembleParts = {
     createThankyouNote: () => createElement("h2", "thank-you", "THANK YOU FOR PLAYING"),
 
     createAuthorLine: () => createElement("h3", "author", "This game is created by Minh Le"),
@@ -35,4 +35,4 @@ const assembleSteps = {
 
 }
 
-export default assembleSteps;
+export default assembleParts;
