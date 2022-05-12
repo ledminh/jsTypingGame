@@ -1,5 +1,4 @@
-import { after } from "lodash";
-import { Level } from "./config";
+import { Level } from "../config";
 
 export {
     createLevelControl,

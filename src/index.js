@@ -18,8 +18,9 @@ import { createLifePanel } from "./components/LifePanel";
 import { createLevelNotification } from "./components/LevelNotification";
 
 
-import {createLevelControl} from './LevelControl';
-import { createLifeControl } from "./LifeControl";
+import {createLevelControl} from './controls/LevelControl';
+import { createLifeControl } from "./controls/LifeControl";
+import {createSoundControl} from "./controls/SoundControl";
 
 import groundImg from './imgs/ground.png';
 import { createClouds } from "./components/Clouds";
@@ -27,7 +28,7 @@ import { createClouds } from "./components/Clouds";
 import sunIMG from './imgs/sun.png';
 
 
-import {createSoundControl} from "./SoundControl";
+
 
 let Boxes = [];
 

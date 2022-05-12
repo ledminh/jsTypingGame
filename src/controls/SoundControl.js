@@ -1,7 +1,7 @@
-import backgroundMusicFile from "./sounds/background.mp3";
-import introMusicFile from "./sounds/intro.mp3";
-import droppingSoundFile from "./sounds/dropping.ogg";
-import poppingSoundFile from "./sounds/popping.ogg";
+import backgroundMusicFile from "../sounds/background.mp3";
+import introMusicFile from "../sounds/intro.mp3";
+import droppingSoundFile from "../sounds/dropping.ogg";
+import poppingSoundFile from "../sounds/popping.ogg";
 
 import { Howl } from "howler";
 
