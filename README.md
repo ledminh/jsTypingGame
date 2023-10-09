@@ -1,11 +1,13 @@
 # jsTypingGame
 
-A simple game to practice typing on computer keyboard.
+**jsTypingGame** is a simple and entertaining typing game designed to help you improve your typing skills. Letters rain from the sky, and your mission is to type the falling letters on your keyboard to destroy them before they reach the ground. As you play, you can sharpen your typing accuracy and speed.
 
-## TECHS USED
+## Technologies Used
 
-Vanila JS, Webpack, lodash library.
+- **Vanilla JavaScript**: The game's core is built using plain JavaScript to create a responsive and interactive typing experience.
 
-## DEMO
+- **Webpack**: Webpack bundles and manages the project's assets and dependencies, making it efficient and easy to maintain.
 
-https://ledminh.github.io/typing-fast/
+## Demo
+
+You can try out the **jsTypingGame** by visiting the [demo here](https://ledminh.github.io/typing-fast/). 
